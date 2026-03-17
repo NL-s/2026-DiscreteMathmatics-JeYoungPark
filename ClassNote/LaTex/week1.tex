@@ -1,0 +1,676 @@
+\documentclass{beamer}
+\usepackage{kotex}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{colortbl}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% ── 색상 정의 ──────────────────────────────────────────────
+\definecolor{navyblue}{HTML}{1E3A5F}
+\definecolor{accentblue}{HTML}{3B82F6}
+\definecolor{lightblue}{HTML}{DBEAFE}
+\definecolor{codegreen}{HTML}{059669}
+\definecolor{lightgreen}{HTML}{D1FAE5}
+\definecolor{codered}{HTML}{DC2626}
+\definecolor{lightred}{HTML}{FEE2E2}
+\definecolor{amber}{HTML}{B45309}
+\definecolor{lightamber}{HTML}{FEF3C7}
+\definecolor{codebg}{HTML}{1E293B}
+\definecolor{codefg}{HTML}{E2E8F0}
+\definecolor{slategray}{HTML}{475569}
+
+% ── Beamer 테마 커스터마이징 ────────────────────────────────
+\setbeamercolor{palette primary}{bg=navyblue, fg=white}
+\setbeamercolor{palette secondary}{bg=navyblue!80, fg=white}
+\setbeamercolor{palette tertiary}{bg=navyblue!60, fg=white}
+\setbeamercolor{palette quaternary}{bg=navyblue, fg=white}
+\setbeamercolor{structure}{fg=navyblue}
+\setbeamercolor{section in toc}{fg=navyblue}
+\setbeamercolor{frametitle}{bg=navyblue, fg=white}
+\setbeamercolor{title}{bg=navyblue!95!black, fg=white}
+\setbeamercolor{block title}{bg=navyblue, fg=white}
+\setbeamercolor{block body}{bg=lightblue!50, fg=black}
+\setbeamercolor{block title alerted}{bg=codered, fg=white}
+\setbeamercolor{block body alerted}{bg=lightred!60, fg=black}
+\setbeamercolor{block title example}{bg=codegreen, fg=white}
+\setbeamercolor{block body example}{bg=lightgreen!60, fg=black}
+
+% ── 코드 스타일 ────────────────────────────────────────────
+\lstdefinestyle{cpp}{
+    language=C++,
+    basicstyle=\ttfamily\scriptsize\color{codefg},
+    keywordstyle=\color{accentblue}\bfseries,
+    commentstyle=\color{slategray}\itshape,
+    stringstyle=\color{lightgreen},
+    showstringspaces=false,
+    backgroundcolor=\color{codebg},
+    frame=single,
+    framerule=0.5pt,
+    rulecolor=\color{slategray},
+    breaklines=true,
+    keepspaces=true,
+    columns=flexible,
+    xleftmargin=4pt,
+    xrightmargin=4pt,
+}
+
+% ── 진리표 셀 색상 헬퍼 ────────────────────────────────────
+\newcommand{\Tcell}{\cellcolor{lightgreen!80}\textcolor{codegreen}{\textbf{T}}}
+\newcommand{\Fcell}{\cellcolor{lightred!80}\textcolor{codered}{\textbf{F}}}
+\newcommand{\Tvac}{\cellcolor{lightamber!80}\textcolor{amber}{\textbf{T ★}}}
+
+\title{Discrete Mathematics}
+\subtitle{Week 1 · Logic \& Propositions}
+\author{JeYoung Park}
+\institute{SeoulTech CS\&CE}
+\date{2026-03-20}
+
+\begin{document}
+
+% ══════════════════════════════════════════════════════════
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% ══ 1. WHY ════════════════════════════════════════════════
+\begin{frame}{WHY — 이산수학을 도대체 왜 배워야 할까?}
+    \small
+    \begin{block}{① CS/CE 심화 과목의 뼈대 (Gateway)}
+        자료구조, 알고리즘, DB, 오토마타 등을 이해하기 위한 \textbf{필수 언어}입니다.
+    \end{block}
+    \vspace{0.15cm}
+    \begin{block}{② 수학적 성숙도 (Mathematical Maturity)}
+        단순 계산이 아닌, 논리적 주장을 \textbf{이해하고 직접 만들어내는} 능력을 기릅니다.
+    \end{block}
+    \vspace{0.15cm}
+    \begin{block}{③ 처음 보는 문제를 돌파하는 힘}
+        정해진 풀이법 암기가 아닌, \textbf{창의적으로 문제를 뚫어내는} 사고력을 훈련합니다.
+    \end{block}
+    \vspace{0.15cm}
+    \begin{block}{④ 엄밀한 증명과 정당성 확보}
+        내 코드와 알고리즘이 \textbf{왜 항상 완벽하게 동작하는지} 수학적으로 증명합니다.
+    \end{block}
+\end{frame}
+
+% ══ 2. NOTATION ══════════════════════════════════════════
+\begin{frame}{기본 기호 (Notation) 와 Proposition (명제)}
+    \small
+    \begin{alertblock}{Proposition (명제)}
+        참(T) 또는 거짓(F)으로 \textbf{명확히 판별}할 수 있는 문장.
+    \end{alertblock}
+    \vspace{0.2cm}
+
+    \textbf{논리 연산자 (Logical Operators):}
+    \begin{center}
+    \footnotesize
+    \begin{tabular}{cll}
+        \toprule
+        \textbf{기호} & \textbf{이름} & \textbf{설명 / C++ 대응} \\
+        \midrule
+        $\land$ & Conjunction (AND) & 둘 다 참일 때 참 \quad \texttt{\&\&} \\
+        $\lor$  & Disjunction (OR)  & 하나라도 참이면 참 \quad \texttt{||} \\
+        $\neg$  & Negation (NOT)    & 참/거짓 반전 \quad \texttt{!} \\
+        $\oplus$ & Exclusive OR (XOR) & 진리값이 다를 때 참 \quad \texttt{\^{}} \\
+        $\rightarrow$ & Implication (조건문) & $p$이면 $q$이다 \quad \textit{(★ 가장 중요)} \\
+        $\leftrightarrow$ & Biconditional (쌍조건문) & 진리값이 같을 때 참 \\
+        \bottomrule
+    \end{tabular}
+    \end{center}
+\end{frame}
+
+% ══ 3. TRUTH TABLE (신규) ════════════════════════════════
+\begin{frame}{진리표 (Truth Table) — 명제의 언어를 시각화하다}
+    \small
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \textbf{주요 연산자 진리표}
+        \vspace{0.15cm}
+
+        \footnotesize
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            \rowcolor{navyblue}\textcolor{white}{\textbf{p}} &
+            \textcolor{white}{\textbf{q}} &
+            \textcolor{white}{\textbf{p $\land$ q}} &
+            \textcolor{white}{\textbf{p $\lor$ q}} \\
+            \hline
+            T & T & \Tcell & \Tcell \\
+            \hline
+            T & F & \Fcell & \Tcell \\
+            \hline
+            F & T & \Fcell & \Tcell \\
+            \hline
+            F & F & \Fcell & \Fcell \\
+            \hline
+        \end{tabular}
+
+        \vspace{0.3cm}
+        \begin{alertblock}{\scriptsize p → q 가 F 가 되는 유일한 경우}
+            \scriptsize \textbf{p = T, q = F} (반례 존재)
+        \end{alertblock}
+
+        \column{0.48\textwidth}
+        \textbf{p → q 진리표 ★ 가장 중요}
+        \vspace{0.15cm}
+
+        \footnotesize
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \rowcolor{navyblue}\textcolor{white}{\textbf{p (가정)}} &
+            \textcolor{white}{\textbf{q (결론)}} &
+            \textcolor{white}{\textbf{p $\rightarrow$ q}} \\
+            \hline
+            T & T & \Tcell \\
+            \hline
+            T & F & \Fcell \\
+            \hline
+            \cellcolor{lightamber!60}F & \cellcolor{lightamber!60}T & \Tvac \\
+            \hline
+            \cellcolor{lightamber!60}F & \cellcolor{lightamber!60}F & \Tvac \\
+            \hline
+        \end{tabular}
+
+        \vspace{0.3cm}
+        \begin{block}{\scriptsize ★ 공허한 참 (Vacuous Truth)}
+            \scriptsize 가정 \textbf{p = F} 이면, q 에 무관하게 \textbf{항상 T}
+        \end{block}
+    \end{columns}
+\end{frame}
+
+% ══ 4. VACUOUS TRUTH ════════════════════════════════════
+\begin{frame}{조건문 ($p \rightarrow q$) 과 공허한 참 (Vacuous Truth)}
+    \small
+    \begin{block}{정의}
+        $p \rightarrow q$ 에서 가정 $p$가 거짓(F)일 때, 결론 $q$에 무관하게 전체 명제가 참(T)이 되는 현상.
+    \end{block}
+
+    \vspace{0.2cm}
+    \textbf{증명 1 — 논리적 동치 (Equivalence) 로 증명}
+    \begin{exampleblock}{}
+        \footnotesize
+        $p \rightarrow q \;\equiv\; \neg p \lor q$
+        \quad\quad
+        $p = F \;\Rightarrow\; \neg p = T \;\Rightarrow\; T \lor q = \mathbf{T}$ \quad ($q$ 값과 완전히 무관)
+    \end{exampleblock}
+
+    \vspace{0.2cm}
+    \textbf{증명 2 — 반례 (Counterexample) 의 부재}
+    \begin{block}{}
+        \footnotesize
+        $p \rightarrow q$ 가 거짓이 되는 유일한 경우는 \textbf{``$p = T$인데 $q = F$''} 뿐입니다.\\
+        애초에 $p$가 거짓이라면 이 반례를 구성할 수단 자체가 없으므로, 수학적으로 참으로 인정합니다.
+    \end{block}
+
+    \vspace{0.2cm}
+    \begin{columns}[T]
+        \column{0.45\textwidth}
+        \begin{exampleblock}{공허한 참 (F → T)}
+            \centering $F \rightarrow T \;=\; \mathbf{T}$ \; ✓
+        \end{exampleblock}
+        \column{0.45\textwidth}
+        \begin{alertblock}{유일한 거짓 (T → F)}
+            \centering $T \rightarrow F \;=\; \mathbf{F}$ \; ✗
+        \end{alertblock}
+    \end{columns}
+\end{frame}
+
+% ══ 5. VACUOUS TRUTH IN C++ ══════════════════════════════
+\begin{frame}[fragile]{Vacuous Truth in C++ Engineering}
+    \small
+    \begin{block}{한정자와 빈 집합}
+        $\forall x \in \emptyset,\; P(x)$ 는 명백한 공허한 참 — 반례를 찾을 수단 자체가 없으므로 항상 T
+    \end{block}
+
+\begin{lstlisting}[style=cpp]
+#include <algorithm>
+#include <vector>
+
+std::vector<int> empty_vec;   // 빈 배열 (원소 없음)
+
+// "이 배열의 모든 원소는 짝수이다."
+// 반례를 찾을 수 없으므로 -> Vacuously True
+bool result = std::all_of(
+    empty_vec.begin(), empty_vec.end(),
+    [](int x) { return x % 2 == 0; }
+);
+// result == true  <- 이것이 공허한 참의 직접적 구현입니다.
+\end{lstlisting}
+
+    \begin{alertblock}{⚠ 실전 버그 패턴}
+        \footnotesize
+        빈 배열이나 Null 상태의 데이터가 입력됐을 때, 검증(Validation) 루프가 공허한 참으로 인해
+        \texttt{true}를 반환하여 보안·접근 제어가 \textbf{뚫리는 버그}가 자주 발생합니다.
+        공허한 참 개념을 명확히 이해해야 방어 코드를 올바르게 작성할 수 있습니다.
+    \end{alertblock}
+\end{frame}
+
+% ══ 6. TAUTOLOGY & CONTRADICTION (신규) ═════════════════
+\begin{frame}{Tautology · Contradiction · Contingency}
+    \small
+    \begin{columns}[T]
+        \column{0.32\textwidth}
+        \begin{exampleblock}{⊤ Tautology (항진명제)}
+            \footnotesize 어떤 변수값을 넣어도 항상 \textbf{T}\\
+            예: $p \lor \neg p$
+        \end{exampleblock}
+        \column{0.32\textwidth}
+        \begin{alertblock}{⊥ Contradiction (모순명제)}
+            \footnotesize 어떤 변수값을 넣어도 항상 \textbf{F}\\
+            예: $p \land \neg p$
+        \end{alertblock}
+        \column{0.32\textwidth}
+        \begin{block}{∼ Contingency (우연명제)}
+            \footnotesize 값에 따라 T/F가 달라짐\\
+            예: $p \lor q$
+        \end{block}
+    \end{columns}
+
+    \vspace{0.25cm}
+    \begin{columns}[T]
+        \column{0.45\textwidth}
+        \textbf{$p \lor \neg p$ 진리표}
+        \vspace{0.1cm}
+
+        \footnotesize
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \rowcolor{codegreen!70}\textcolor{white}{\textbf{p}} &
+            \textcolor{white}{\textbf{¬p}} &
+            \textcolor{white}{\textbf{p $\lor$ ¬p}} \\
+            \hline
+            T & F & \Tcell \\
+            \hline
+            F & T & \Tcell \\
+            \hline
+        \end{tabular}
+
+        \column{0.45\textwidth}
+        \textbf{$p \land \neg p$ 진리표}
+        \vspace{0.1cm}
+
+        \footnotesize
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \rowcolor{codered!70}\textcolor{white}{\textbf{p}} &
+            \textcolor{white}{\textbf{¬p}} &
+            \textcolor{white}{\textbf{p $\land$ ¬p}} \\
+            \hline
+            T & F & \Fcell \\
+            \hline
+            F & T & \Fcell \\
+            \hline
+        \end{tabular}
+    \end{columns}
+
+    \vspace{0.25cm}
+    \begin{block}{왜 중요한가?}
+        \footnotesize
+        \textbf{\textcolor{codegreen}{Tautology}}: 논리 동치 법칙(드 모르간, 분배법칙 등)의 근거 —
+        이 법칙들 자체가 Tautology입니다.\\
+        \textbf{\textcolor{codered}{Contradiction}}: SAT에서 ``이 식은 절대 참이 될 수 없음''을
+        판단하는 기준이 됩니다.
+    \end{block}
+\end{frame}
+
+% ══ 7. LOGICAL EQUIVALENCES ════════════════════════════
+\begin{frame}{Logical Equivalences (논리적 동치 법칙)}
+    \footnotesize
+    복잡한 명제(조건문)를 수학적으로 \textbf{Refactoring}하기 위한 핵심 법칙들입니다.
+    \vspace{0.2cm}
+
+    \begin{center}
+    \begin{tabular}{ll}
+        \toprule
+        \textbf{동치 법칙 (Equivalence)} & \textbf{이름 (Name)} \\
+        \midrule
+        $p \land \mathbf{T} \equiv p \quad / \quad p \lor \mathbf{F} \equiv p$ & Identity laws \\
+        $p \lor \mathbf{T} \equiv \mathbf{T} \quad / \quad p \land \mathbf{F} \equiv \mathbf{F}$ & Domination laws \\
+        $p \lor p \equiv p \quad / \quad p \land p \equiv p$ & Idempotent laws \\
+        $\neg(\neg p) \equiv p$ & Double negation law \\
+        $p \lor (q \land r) \equiv (p \lor q) \land (p \lor r)$ & Distributive laws \\
+        $\neg(p \land q) \equiv \neg p \lor \neg q$ & De Morgan's laws \\
+        $p \lor (p \land q) \equiv p \quad / \quad p \land (p \lor q) \equiv p$ & Absorption laws \\
+        \midrule
+        \rowcolor{lightblue}
+        $p \rightarrow q \equiv \neg p \lor q$ & \textbf{Conditional ★ 핵심} \\
+        \bottomrule
+    \end{tabular}
+    \end{center}
+\end{frame}
+
+% ══ 8. SPEC → PROPOSITION ══════════════════════════════
+\begin{frame}[fragile]{기획서를 Proposition으로 — 변환의 시작}
+    \small
+    \begin{block}{요구사항 \small(변수: $A$=Admin, $C$=Active, $P$=Premium)}
+        ``유저가 관리자이면서 활성 상태이거나, 관리자는 아니지만 활성 상태이고 프리미엄이거나,
+        활성 상태이면서 프리미엄이 아닌 경우에 한하여 접근을 허용하라.''
+    \end{block}
+
+    \textbf{직역 Proposition:}
+    \[
+        (A \land C) \;\lor\; (\neg A \land C \land P) \;\lor\; (C \land \neg P)
+    \]
+
+\begin{lstlisting}[style=cpp]
+// 직역한 코드: 읽기 어렵고 버그가 발생하기 쉽습니다.
+if ((isAdmin && isActive) ||
+    (!isAdmin && isActive && isPremium) ||
+    (isActive && !isPremium))
+{
+    grantAccess();
+}
+\end{lstlisting}
+
+    \begin{exampleblock}{�� 질문}
+        \small Logical Equivalences를 사용하면 이 식을 더 간단하게 줄일 수 있을까요?\\
+        → 다음 슬라이드에서 Step-by-Step Proof로 확인해봅시다!
+    \end{exampleblock}
+\end{frame}
+
+% ══ 9. PROOF: REDUCTION ════════════════════════════════
+\begin{frame}{Proof: Proposition Reduction (Step-by-Step)}
+    \small
+    \textbf{주어진 명제:} $(A \land C) \lor (\neg A \land C \land P) \lor (C \land \neg P)$
+    \vspace{0.25cm}
+
+    \begin{align*}
+        & \equiv C \land \bigl(A \lor (\neg A \land P) \lor \neg P\bigr)
+            && \text{\footnotesize Distributive law ($C$로 묶기)} \\
+        & \equiv C \land (A \lor P \lor \neg P)
+            && \text{\footnotesize Absorption 변형: $X \lor (\neg X \land Y) \equiv X \lor Y$} \\
+        & \equiv C \land (A \lor \mathbf{T})
+            && \text{\footnotesize Negation law: $P \lor \neg P \equiv \mathbf{T}$} \\
+        & \equiv C \land \mathbf{T}
+            && \text{\footnotesize Domination law: $A \lor \mathbf{T} \equiv \mathbf{T}$} \\
+        & \equiv \boxed{C}
+            && \text{\footnotesize Identity law: $C \land \mathbf{T} \equiv C$ \quad ✓ 완성!}
+    \end{align*}
+
+    \vspace{0.1cm}
+    \begin{exampleblock}{증명 결과}
+        복잡했던 기획서의 진짜 의도는 단 하나였습니다.\\
+        \textbf{``활성 상태($C$)인 유저에게 접근을 허용하라.''}
+    \end{exampleblock}
+\end{frame}
+
+% ══ 10. RESULT: CLEAN CODE ═════════════════════════════
+\begin{frame}[fragile]{Result — Refactoring 완료}
+    \small
+
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \textbf{\textcolor{codered}{BEFORE}}
+\begin{lstlisting}[style=cpp]
+// 직역: 읽기 어렵고 버그 유발
+if ((isAdmin && isActive) ||
+    (!isAdmin && isActive
+               && isPremium) ||
+    (isActive && !isPremium))
+\end{lstlisting}
+
+        \column{0.48\textwidth}
+        \textbf{\textcolor{codegreen}{AFTER (증명 완료)}}
+\begin{lstlisting}[style=cpp]
+// 수학적으로 동일함이 증명됨
+if (isActive) {
+    grantAccess();
+}
+\end{lstlisting}
+    \end{columns}
+
+    \vspace{0.2cm}
+    \begin{block}{핵심 교훈 (Takeaways)}
+        \footnotesize
+        \begin{itemize}
+            \setlength\itemsep{0.3em}
+            \item 복잡한 다변수 조건문도 논리 연산을 통해 \textbf{완전한 Reduction}이 가능합니다.
+            \item 이 과정은 취향이 아닙니다. 두 코드가 \textbf{수학적으로 동치(Equivalent)임이 증명}된 것입니다.
+            \item 이산수학은 단순한 이론이 아닌, 코드를 클린하면서도 \textbf{논리적으로 완벽하게} 만드는 도구입니다.
+        \end{itemize}
+    \end{block}
+
+    \vspace{0.1cm}
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \begin{alertblock}{\footnotesize Before}
+            \footnotesize 조건 3개 · 변수 참조 7회 · 높은 복잡도
+        \end{alertblock}
+        \column{0.48\textwidth}
+        \begin{exampleblock}{\footnotesize After}
+            \footnotesize 조건 1개 · 변수 참조 1회 · 최소 복잡도
+        \end{exampleblock}
+    \end{columns}
+\end{frame}
+
+% ══ 11. PREDICATE & QUANTIFIER (보강) ══════════════════
+\begin{frame}[fragile]{Predicate (술어) · Quantifier (한정자) — 코드로 바라보기}
+    \small
+    \begin{block}{Predicate (술어)란?}
+        주어의 성질이나 관계를 나타내는 말. 명제 함수 $P(x)$는 변수가 채워져야 참/거짓 판별 가능.
+    \end{block}
+
+    \vspace{0.15cm}
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \textbf{$\forall x\, P(x)$ — Universal}\\
+        \footnotesize 모든 $x$에 대해 참. 반례 하나라도 있으면 거짓.
+\begin{lstlisting}[style=cpp]
+// 모든 원소가 짝수?
+std::all_of(v.begin(), v.end(),
+  [](int x){ return x%2==0; });
+// ⚠ 빈 vec -> Vacuously True!
+\end{lstlisting}
+
+        \column{0.48\textwidth}
+        \textbf{$\exists x\, P(x)$ — Existential}\\
+        \footnotesize 조건을 만족하는 $x$가 하나라도 존재.
+\begin{lstlisting}[style=cpp]
+// 짝수가 하나라도 있나?
+std::any_of(v.begin(), v.end(),
+  [](int x){ return x%2==0; });
+// 빈 vec -> 항상 false
+\end{lstlisting}
+    \end{columns}
+
+    \vspace{0.15cm}
+    \begin{block}{부정 (Negation)}
+        \small
+        $\neg(\forall x\, P(x)) \equiv \exists x\, \neg P(x)$
+        \hfill
+        $\neg(\exists x\, P(x)) \equiv \forall x\, \neg P(x)$
+    \end{block}
+
+    \begin{alertblock}{⚠ 공허한 참 연결}
+        \small $\forall x \in \emptyset,\, P(x)$ 는 항상 참 $=$ 빈 컨테이너에서 \texttt{all\_of()} 는 항상 \texttt{true} 반환!
+    \end{alertblock}
+\end{frame}
+
+% ══ 12. SAT ════════════════════════════════════════════
+\begin{frame}{Satisfiability (충족 가능성, SAT)}
+    \small
+    \begin{block}{Satisfiability 란?}
+        주어진 복합 명제가 \textbf{참(True)}이 되게 만들 수 있는 변수들의 진리값 조합이
+        \textbf{적어도 하나 존재}하는가?
+    \end{block}
+
+    \vspace{0.2cm}
+    \begin{columns}[T]
+        \column{0.32\textwidth}
+        \begin{exampleblock}{Satisfiable}
+            \footnotesize $p \lor \neg q$\\[3pt]
+            참으로 만들 수 있는 조합 존재.\\
+            예: $p{=}T,\, q{=}F$ 일 때 참.
+        \end{exampleblock}
+        \column{0.32\textwidth}
+        \begin{alertblock}{Contradiction}
+            \footnotesize $p \land \neg p$\\[3pt]
+            어떤 값을 넣어도 항상 거짓.\\
+            참이 되는 조합이 없음.
+        \end{alertblock}
+        \column{0.32\textwidth}
+        \begin{block}{Tautology}
+            \footnotesize $p \lor \neg p$\\[3pt]
+            항상 참이므로 Satisfiable에 포함. 모든 조합이 참.
+        \end{block}
+    \end{columns}
+
+    \vspace{0.3cm}
+    \begin{block}{SAT 문제의 중요성}
+        \footnotesize
+        로봇 공학, 소프트웨어 테스팅, 회로 설계, AI Planning 등 수많은 현실 제약 조건 문제들이
+        SAT 문제로 모델링됩니다. 바로 다음에 나올 \textbf{n-Queens}가 그 대표 예시입니다.
+    \end{block}
+\end{frame}
+
+% ══ 13. n-QUEENS (1) ═══════════════════════════════════
+\begin{frame}{SAT Application: $n$-Queens 문제 모델링 (1/2)}
+    \scriptsize
+    \textbf{문제:} $n \times n$ 체스판에 $n$개의 퀸을 서로 공격하지 못하게 배치할 수 있는가?\\
+    \textbf{변수 정의:} $p(i, j)$ = $i$행 $j$열에 퀸이 있으면 True, 없으면 False.
+
+    \vspace{0.15cm}
+    \begin{columns}[T]
+        \column{0.22\textwidth}
+        \textbf{4-Queens 해답}
+        \vspace{0.1cm}
+
+        \setlength{\tabcolsep}{3pt}
+        \renewcommand{\arraystretch}{1.3}
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            \cellcolor{gray!20} & \cellcolor{lightamber!80}{\large♛} & \cellcolor{gray!20} & \\
+            \hline
+            \cellcolor{gray!20} & \cellcolor{gray!20} & \cellcolor{gray!20} & \cellcolor{lightamber!80}{\large♛} \\
+            \hline
+            \cellcolor{lightamber!80}{\large♛} & \cellcolor{gray!20} & \cellcolor{gray!20} & \cellcolor{gray!20} \\
+            \hline
+            \cellcolor{gray!20} & \cellcolor{gray!20} & \cellcolor{lightamber!80}{\large♛} & \cellcolor{gray!20} \\
+            \hline
+        \end{tabular}
+
+        \column{0.74\textwidth}
+        \begin{exampleblock}{조건 1 — 각 행(Row)에는 퀸이 최소 1개}
+            $\displaystyle Q_1 = \bigwedge_{i=1}^n \bigvee_{j=1}^n p(i, j)$\\[4pt]
+            \textit{$i$행에 퀸이 하나라도 있어야 함($\lor$), 그리고 모든 행이 그래야 함($\land$)}
+        \end{exampleblock}
+
+        \vspace{0.2cm}
+        \begin{block}{조건 2 — 각 행(Row)에는 퀸이 최대 1개}
+            $\displaystyle Q_2 = \bigwedge_{i=1}^n \bigwedge_{j=1}^{n-1} \bigwedge_{k=j+1}^n (\neg p(i,j) \lor \neg p(i,k))$\\[4pt]
+            \textit{같은 행 $i$에서 두 열 $j, k$를 뽑으면 둘 다 퀸이면 안 됨.\\
+            De Morgan: $p(i,j) \land p(i,k)$ 금지 $\equiv$ $\neg p \lor \neg p$ 가 항상 성립해야 함.}
+        \end{block}
+    \end{columns}
+
+    \vspace{0.1cm}
+    \begin{exampleblock}{}
+        \centering 조건 1 + 2 합산: 각 행마다 반드시 \textbf{정확히 1개}의 퀸이 존재해야 합니다.
+    \end{exampleblock}
+\end{frame}
+
+% ══ 14. n-QUEENS (2) ═══════════════════════════════════
+\begin{frame}{SAT Application: $n$-Queens Complete Proof (2/2)}
+    \scriptsize
+    \begin{alertblock}{조건 3 — 각 열(Column)에는 최대 1개}
+        $\displaystyle Q_3 = \bigwedge_{j=1}^n \bigwedge_{i=1}^{n-1} \bigwedge_{k=i+1}^n (\neg p(i,j) \lor \neg p(k,j))$\\[3pt]
+        \textit{같은 열 $j$에서 서로 다른 두 행 $i, k$를 뽑으면 둘 다 퀸이면 안 됩니다.
+        (조건 2와 동일한 논리 구조 — 행↔열 전환)}
+    \end{alertblock}
+
+    \vspace{0.15cm}
+    \begin{block}{조건 4 \& 5 — 모든 대각선에는 최대 1개}
+        $\displaystyle Q_4 = \bigwedge_{i,j,k \geq 1} (\neg p(i,j) \lor \neg p(i-k,\, j+k))$
+        \quad \textit{(↗ 방향 대각선)}\\[4pt]
+        $\displaystyle Q_5 = \bigwedge_{i,j,k \geq 1} (\neg p(i,j) \lor \neg p(i+k,\, j+k))$
+        \quad \textit{(↘ 방향 대각선)}\\[5pt]
+        \textit{직관: 두 퀸이 같은 대각선 위에 있으면 서로 공격합니다.
+        위치 $(i,j)$와 $(i{-}k, j{+}k)$에 동시에 퀸이 있으면 안 됨 → De Morgan 적용.}
+    \end{block}
+
+    \vspace{0.15cm}
+    \begin{exampleblock}{최종 SAT Equation}
+        \begin{center}
+            \large $Q \;=\; Q_1 \;\land\; Q_2 \;\land\; Q_3 \;\land\; Q_4 \;\land\; Q_5$
+        \end{center}
+        \normalsize
+        이 논리식 $Q$가 \textbf{True}가 되게 하는 $p(i,j)$의 조합을 찾는 것이\\
+        $n$-Queens의 정답을 구하는 것과 \textbf{수학적으로 완벽히 동일}합니다.
+    \end{exampleblock}
+\end{frame}
+
+% ══ 15. 실습 트랙 ══════════════════════════════════════
+\begin{frame}{오늘의 실습 트랙 (1시간)}
+    \small
+    논리적 사고력을 코드로 구현하는 시간입니다.
+    \vspace{0.2cm}
+
+    \begin{exampleblock}{기본 트랙 — BOJ 11723 (집합)}
+        \footnotesize
+        \textbf{목표:} $\land\, \lor\, \neg\, \oplus$ 논리 기호를 비트 연산으로 직역하기\\
+        \textbf{힌트:} 비트마스크에서 원소 유무(비트 1/0)가 논리 기호와 1:1 대응됩니다.
+    \end{exampleblock}
+
+    \vspace{0.1cm}
+    \begin{block}{심화 트랙 — BOJ 1987 (알파벳)}
+        \footnotesize
+        \textbf{목표:} $\exists$ 판별과 비트마스크 방문 처리 최적화\\
+        \textbf{힌트:} 방문한 알파벳 집합을 비트 연산으로 관리하면 메모리 효율이 대폭 향상됩니다.
+    \end{block}
+
+    \vspace{0.1cm}
+    \begin{alertblock}{도전 트랙 — BOJ 11277 (2-SAT - 1) \small [Platinum]}
+        \footnotesize
+        \textbf{목표:} 함의($p \rightarrow q$)를 2-SAT 그래프 모델링으로 변환\\
+        \textbf{힌트:} 힘들면 과제로 대체해도 좋습니다!
+    \end{alertblock}
+
+    \vspace{0.2cm}
+    \textit{\footnotesize * 라이브 코딩은 기본 트랙 중심으로 진행됩니다.
+    심화/도전 트랙은 스스로 논리식을 세우고 Reduction 해보며 자유롭게 풀어보세요!}
+\end{frame}
+
+% ══ 16. 다음 주 예고 ════════════════════════════════════
+\begin{frame}{다음 주 예고 (Week 2)}
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \begin{block}{Week 1 — 오늘}
+            \small 참/거짓을 다루는\\
+            \textbf{명제와 논리의 언어}
+            \vspace{0.2cm}
+
+            \centering
+            \large $P \land Q \quad P \lor Q \quad P \rightarrow Q$
+
+            \vspace{0.2cm}
+            \small\textit{Proposition · Logic · SAT}
+        \end{block}
+
+        \column{0.48\textwidth}
+        \begin{exampleblock}{Week 2 — 다음 주}
+            \small 참인 것들을 구조적으로\\
+            \textbf{다루는 언어}
+            \vspace{0.2cm}
+
+            \centering
+            \large $P \land Q \;\leftrightarrow\; A \cap B$\\[4pt]
+            $P \lor Q \;\leftrightarrow\; A \cup B$
+
+            \vspace{0.2cm}
+            \small\textit{Sets · Matrix Operations}
+        \end{exampleblock}
+    \end{columns}
+
+    \vspace{0.4cm}
+    \begin{center}
+        \small 오늘 배운 논리 연산을 확장하여, 수많은 오브젝트의 상태를 한꺼번에 처리하는\\
+        \textbf{집합(Sets)과 행렬(Matrix)}의 세계로 들어갑니다.
+    \end{center}
+\end{frame}
+
+\end{document}
