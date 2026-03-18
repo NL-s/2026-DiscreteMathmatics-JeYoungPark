@@ -25,7 +25,7 @@ int main() {
         } else if (h == "remove") {
             S &= ~(1 << in);
         } else if (h == "check") {
-            cout << (S && (1 << in)) << '\n';
+            cout << ((S & (1 << in)) ? 1 : 0) << '\n';
         } else if (h == "toggle") {
             S ^= (1 << in);
         } else if (h == "all") {
