@@ -15,7 +15,7 @@ int main() {
         int x; 
         cin >> x;
         
-        if (s.count(x)) 
+        if (s.count(x)) //s.count(x) == s에 x라는 원소가 있냐? 
             common++;
         else 
             s.insert(x);
