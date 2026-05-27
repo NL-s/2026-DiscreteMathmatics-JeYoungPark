@@ -28,36 +28,35 @@ graph TD
 ```
 
 확인:
-- `3`의 왼쪽: `{1}` ✓ 모두 3보다 작음
-- `3`의 오른쪽: `{6, 4, 7}` ✓ 모두 3보다 큼
-- `8`의 왼쪽: `{3,1,6,4,7}` ✓ 모두 8 미만
-- `8`의 오른쪽: `{10,9,14}` ✓ 모두 8 초과
+- `3`의 왼쪽: `{1}` 모두 3보다 작음
+- `3`의 오른쪽: `{6, 4, 7}` 모두 3보다 큼
+- `8`의 왼쪽: `{3,1,6,4,7}` 모두 8 미만
+- `8`의 오른쪽: `{10,9,14}` 모두 8 초과
 
 ### 2.1.1 핵심 연산 — 모두 $O(h)$, 균형이면 $O(\log n)$
 
-```python
-class TreeNode:
-    def __init__(self, val):
-        self.val = val
-        self.left = self.right = None
+```cpp
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int v) : val(v), left(nullptr), right(nullptr) {}
+};
 
-# 검색
-def search(root, key):
-    if not root or root.val == key:
-        return root
-    if key < root.val:
-        return search(root.left, key)
-    return search(root.right, key)
+// 검색
+TreeNode* search(TreeNode* root, int key) {
+    if (!root || root->val == key) return root;
+    if (key < root->val) return search(root->left, key);
+    return search(root->right, key);
+}
 
-# 삽입
-def insert(root, key):
-    if not root:
-        return TreeNode(key)
-    if key < root.val:
-        root.left = insert(root.left, key)
-    elif key > root.val:
-        root.right = insert(root.right, key)
-    return root
+// 삽입
+TreeNode* insert(TreeNode* root, int key) {
+    if (!root) return new TreeNode(key);
+    if (key < root->val)      root->left  = insert(root->left, key);
+    else if (key > root->val) root->right = insert(root->right, key);
+    return root;
+}
 ```
 
 ### 2.1.2 삭제 — 가장 까다로운 부분
@@ -67,28 +66,29 @@ def insert(root, key):
 2. **자식 1개** — 자식으로 대체
 3. **자식 2개** — 오른쪽 subtree의 **최솟값**(in-order successor) 또는 왼쪽 subtree의 **최댓값**으로 대체
 
-```python
-def find_min(node):
-    while node.left:
-        node = node.left
-    return node
+```cpp
+TreeNode* find_min(TreeNode* node) {
+    while (node->left) node = node->left;
+    return node;
+}
 
-def delete(root, key):
-    if not root:
-        return None
-    if key < root.val:
-        root.left = delete(root.left, key)
-    elif key > root.val:
-        root.right = delete(root.right, key)
-    else:
-        # 찾았다!
-        if not root.left:  return root.right
-        if not root.right: return root.left
-        # 자식 2개: in-order successor로 대체
-        succ = find_min(root.right)
-        root.val = succ.val
-        root.right = delete(root.right, succ.val)
-    return root
+TreeNode* erase(TreeNode* root, int key) {
+    if (!root) return nullptr;
+    if (key < root->val) {
+        root->left = erase(root->left, key);
+    } else if (key > root->val) {
+        root->right = erase(root->right, key);
+    } else {
+        // 찾았다
+        if (!root->left)  { TreeNode* r = root->right; delete root; return r; }
+        if (!root->right) { TreeNode* l = root->left;  delete root; return l; }
+        // 자식 2개: in-order successor로 대체
+        TreeNode* succ = find_min(root->right);
+        root->val = succ->val;
+        root->right = erase(root->right, succ->val);
+    }
+    return root;
+}
 ```
 
 ### 2.1.3 BST의 한계 — 그리고 자가 균형 트리
@@ -141,57 +141,62 @@ graph TD
     C --> G((25))
 ```
 
-- `parent(i) = i // 2`
+- `parent(i) = i / 2`
 - `left(i) = 2*i`
 - `right(i) = 2*i + 1`
 
 ### 2.2.2 핵심 연산 — Heapify Up / Down
 
-```python
-class MinHeap:
-    def __init__(self):
-        self.h = [0]  # 인덱스 0은 sentinel
+```cpp
+struct MinHeap {
+    std::vector<int> h{0};  // 인덱스 0은 sentinel
 
-    def push(self, x):
-        self.h.append(x)
-        self._up(len(self.h) - 1)
+    void push(int x) {
+        h.push_back(x);
+        sift_up((int)h.size() - 1);
+    }
 
-    def pop(self):
-        if len(self.h) <= 1:
-            return None
-        top = self.h[1]
-        self.h[1] = self.h[-1]
-        self.h.pop()
-        if len(self.h) > 1:
-            self._down(1)
-        return top
+    int pop() {
+        if (h.size() <= 1) return -1;
+        int top = h[1];
+        h[1] = h.back();
+        h.pop_back();
+        if (h.size() > 1) sift_down(1);
+        return top;
+    }
 
-    def _up(self, i):
-        while i > 1 and self.h[i] < self.h[i // 2]:
-            self.h[i], self.h[i // 2] = self.h[i // 2], self.h[i]
-            i //= 2
+private:
+    void sift_up(int i) {
+        while (i > 1 && h[i] < h[i / 2]) {
+            std::swap(h[i], h[i / 2]);
+            i /= 2;
+        }
+    }
 
-    def _down(self, i):
-        n = len(self.h)
-        while 2 * i < n:
-            j = 2 * i  # left child
-            if j + 1 < n and self.h[j + 1] < self.h[j]:
-                j += 1  # 더 작은 자식 선택
-            if self.h[i] <= self.h[j]:
-                break
-            self.h[i], self.h[j] = self.h[j], self.h[i]
-            i = j
+    void sift_down(int i) {
+        int n = (int)h.size();
+        while (2 * i < n) {
+            int j = 2 * i;
+            if (j + 1 < n && h[j + 1] < h[j]) ++j;
+            if (h[i] <= h[j]) break;
+            std::swap(h[i], h[j]);
+            i = j;
+        }
+    }
+};
 ```
 
-Python은 `heapq` 모듈로 min-heap이 이미 표준 라이브러리에 있습니다:
+C++은 `<queue>`의 `std::priority_queue`로 max-heap이 표준 라이브러리에 있습니다. min-heap은 비교자를 뒤집어서 사용:
 
-```python
-import heapq
-h = []
-heapq.heappush(h, 3)
-heapq.heappush(h, 1)
-heapq.heappush(h, 4)
-print(heapq.heappop(h))  # 1
+```cpp
+#include <queue>
+std::priority_queue<int> max_heap;
+std::priority_queue<int, std::vector<int>, std::greater<int>> min_heap;
+
+min_heap.push(3);
+min_heap.push(1);
+min_heap.push(4);
+std::cout << min_heap.top();  // 1
 ```
 
 ### 2.2.3 시간 복잡도
@@ -201,7 +206,7 @@ print(heapq.heappop(h))  # 1
 | push | $O(\log n)$ |
 | pop | $O(\log n)$ |
 | peek (top) | $O(1)$ |
-| build heap (배열 → 힙) | $O(n)$ !! |
+| build heap (배열 → 힙) | $O(n)$ |
 
 > $O(n)$ build heap이 흥미로운 결과입니다. 각 노드에서 $O(\log n)$이 아니라, **bottom-up으로 sift-down하면 전체가 $O(n)$** 으로 줄어듭니다. 이는 트리의 높이별 노드 수가 기하급수적으로 감소하기 때문 ($\sum h \cdot 2^{-h}$가 수렴).
 
@@ -220,63 +225,71 @@ graph TD
     Root --> D
     C --> CA[a]
     C --> CU[u]
-    CA --> CAR[r ✓]
-    CA --> CAT[t ✓]
-    CU --> CUP[p ✓]
-    D --> DO[o ✓]
+    CA --> CAR[r: end]
+    CA --> CAT[t: end]
+    CU --> CUP[p: end]
+    D --> DO[o: end]
 ```
 
-체크 표시는 "여기서 한 단어가 끝남"을 의미.
+`end` 표시는 "여기서 한 단어가 끝남"을 의미.
 
 ### 2.3.1 구현
 
-```python
-class TrieNode:
-    def __init__(self):
-        self.children = {}
-        self.is_end = False
+```cpp
+struct TrieNode {
+    std::array<TrieNode*, 26> children{};   // 알파벳 26 (소문자 기준)
+    bool is_end = false;
+};
 
-class Trie:
-    def __init__(self):
-        self.root = TrieNode()
+struct Trie {
+    TrieNode* root = new TrieNode();
 
-    def insert(self, word: str):
-        node = self.root
-        for ch in word:
-            if ch not in node.children:
-                node.children[ch] = TrieNode()
-            node = node.children[ch]
-        node.is_end = True
+    void insert(const std::string& word) {
+        TrieNode* node = root;
+        for (char ch : word) {
+            int idx = ch - 'a';
+            if (!node->children[idx]) node->children[idx] = new TrieNode();
+            node = node->children[idx];
+        }
+        node->is_end = true;
+    }
 
-    def search(self, word: str) -> bool:
-        node = self.root
-        for ch in word:
-            if ch not in node.children:
-                return False
-            node = node.children[ch]
-        return node.is_end
+    bool search(const std::string& word) const {
+        TrieNode* node = walk(word);
+        return node && node->is_end;
+    }
 
-    def starts_with(self, prefix: str) -> bool:
-        node = self.root
-        for ch in prefix:
-            if ch not in node.children:
-                return False
-            node = node.children[ch]
-        return True
+    bool starts_with(const std::string& prefix) const {
+        return walk(prefix) != nullptr;
+    }
+
+private:
+    TrieNode* walk(const std::string& s) const {
+        TrieNode* node = root;
+        for (char ch : s) {
+            int idx = ch - 'a';
+            if (!node->children[idx]) return nullptr;
+            node = node->children[idx];
+        }
+        return node;
+    }
+};
 ```
+
+알파벳이 작거나 가변일 때는 배열 대신 `std::unordered_map<char, TrieNode*>`를 사용합니다.
 
 ### 2.3.2 활용
 
 - **자동완성 (autocomplete)** — 검색창의 추천
-- **사전 검색** — O(단어 길이)에 검색
+- **사전 검색** — $O(L)$에 검색
 - **IP 라우팅** — Patricia trie
 - **bioinformatics** — suffix tree, suffix array
 - **압축** — Lempel-Ziv
 
 ### 2.3.3 시간/공간
 
-- 검색: $O(L)$ ($L$ = 검색어 길이) — 단어 개수 $n$과 무관!
-- 공간: 최악 $O(\sum L_i \cdot |\Sigma|)$ — 알파벳이 크면 비싸짐
+- 검색: $O(L)$ ($L$ = 검색어 길이) — 단어 개수 $n$과 무관
+- 공간: 최악 $O(\sum L_i \cdot \lvert \Sigma \rvert)$ — 알파벳이 크면 비싸짐
 
 ---
 
@@ -289,31 +302,35 @@ class Trie:
 | **Trie** | Yes (사전순) | $O(L)$ | $O(L)$ | 문자열·prefix |
 | **Hash Table** (참고) | No | $O(n)$ | $O(1)$ 평균 | 키-값 매핑 |
 
-> **"세 구조 모두 트리"**라는 점이 이 강의의 포인트입니다. 같은 골격에 다른 규칙을 얹은 것뿐입니다.
+> "세 구조 모두 트리"라는 점이 이 강의의 포인트입니다. 같은 골격에 다른 규칙을 얹은 것뿐입니다.
 
 ---
 
 ## 2.5 실습 예제 — LeetCode
 
-###  [LeetCode 700. Search in a Binary Search Tree](https://leetcode.com/problems/search-in-a-binary-search-tree/)
+### [LeetCode 700. Search in a Binary Search Tree](https://leetcode.com/problems/search-in-a-binary-search-tree/)
 
 > 주어진 BST에서 값 `val`을 가진 노드를 찾으세요.
 
 <details>
 <summary>풀이 보기</summary>
 
-```python
-class Solution:
-    def searchBST(self, root, val):
-        while root and root.val != val:
-            root = root.left if val < root.val else root.right
-        return root
+```cpp
+class Solution {
+public:
+    TreeNode* searchBST(TreeNode* root, int val) {
+        while (root && root->val != val) {
+            root = (val < root->val) ? root->left : root->right;
+        }
+        return root;
+    }
+};
 ```
 
-**해설**: BST 정의에 따라 한 방향씩만 내려가면 됩니다. 시간 $O(h)$, 공간 $O(1)$ (재귀 없이).
+BST 정의에 따라 한 방향씩만 내려가면 됩니다. 시간 $O(h)$, 공간 $O(1)$.
 </details>
 
-###  [LeetCode 98. Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
+### [LeetCode 98. Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
 
 > 주어진 이진 트리가 BST 조건을 만족하는지 검사하세요.
 
@@ -327,60 +344,62 @@ class Solution:
    / \
   3   7
      / \
-    2   8     ← 2가 5보다 작은데 5의 오른쪽 subtree!
+    2   8     (2가 5보다 작은데 5의 오른쪽 subtree)
 ```
 
 올바른 풀이: 각 노드에 **(min, max) 구간 제약**을 전달.
 
-```python
-class Solution:
-    def isValidBST(self, root):
-        def valid(node, lo=float('-inf'), hi=float('inf')):
-            if not node: return True
-            if not (lo < node.val < hi): return False
-            return valid(node.left, lo, node.val) and \
-                   valid(node.right, node.val, hi)
-        return valid(root)
+```cpp
+class Solution {
+public:
+    bool isValidBST(TreeNode* root, long lo = LONG_MIN, long hi = LONG_MAX) {
+        if (!root) return true;
+        if (root->val <= lo || root->val >= hi) return false;
+        return isValidBST(root->left,  lo, root->val)
+            && isValidBST(root->right, root->val, hi);
+    }
+};
 ```
 
-**또는** in-order 순회 결과가 strictly increasing인지 검사해도 됩니다 (1.7절 참고).
+또는 in-order 순회 결과가 strictly increasing인지 검사해도 됩니다 (1.7절 참고).
 </details>
 
-###  [LeetCode 215. Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/)
+### [LeetCode 215. Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/)
 
 > 배열에서 k번째로 큰 원소를 찾으세요.
 
 <details>
 <summary>풀이 보기 (힙 사용)</summary>
 
-```python
-import heapq
-class Solution:
-    def findKthLargest(self, nums, k):
-        # 크기 k인 min-heap을 유지
-        # 결국 heap에는 "상위 k개"가 남고, top이 k번째 큰 값
-        h = []
-        for x in nums:
-            heapq.heappush(h, x)
-            if len(h) > k:
-                heapq.heappop(h)
-        return h[0]
+```cpp
+class Solution {
+public:
+    int findKthLargest(std::vector<int>& nums, int k) {
+        // 크기 k인 min-heap을 유지. 결국 heap에는 상위 k개가 남고 top이 k번째 큰 값
+        std::priority_queue<int, std::vector<int>, std::greater<int>> h;
+        for (int x : nums) {
+            h.push(x);
+            if ((int)h.size() > k) h.pop();
+        }
+        return h.top();
+    }
+};
 ```
 
-**시간**: $O(n \log k)$, **공간**: $O(k)$. 전체 정렬 $O(n \log n)$보다 빠릅니다 (k가 작을수록).
+시간 $O(n \log k)$, 공간 $O(k)$. 전체 정렬 $O(n \log n)$보다 빠릅니다 (k가 작을수록).
 </details>
 
-###  [LeetCode 208. Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/)
+### [LeetCode 208. Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/)
 
 > Trie 자료구조의 `insert`, `search`, `startsWith` 메서드를 구현하세요.
 
 <details>
 <summary>풀이 보기</summary>
 
-위 2.3.1의 코드를 그대로 LeetCode에 제출하면 통과합니다. 핵심은 **딕셔너리**로 `children`을 관리하는 것 — 알파벳 26개를 가정하더라도 메모리 효율이 더 좋습니다.
+위 2.3.1의 코드를 그대로 LeetCode에 제출하면 통과합니다. 핵심은 알파벳 크기에 맞춰 자식 배열 또는 해시맵을 선택하는 것 — 알파벳 26개라면 배열이 효율적입니다.
 </details>
 
-###  [LeetCode 295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/)
+### [LeetCode 295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/)
 
 > 스트림으로 들어오는 숫자들의 중앙값을 매번 빠르게 구하세요.
 
@@ -389,30 +408,30 @@ class Solution:
 
 **아이디어**: 작은 절반을 max-heap에, 큰 절반을 min-heap에 저장. 두 힙의 크기 차이를 1 이내로 유지.
 
-```python
-import heapq
-class MedianFinder:
-    def __init__(self):
-        self.lo = []  # max-heap (값에 -1 곱해 저장)
-        self.hi = []  # min-heap
+```cpp
+class MedianFinder {
+    std::priority_queue<int> lo;  // max-heap (작은 절반)
+    std::priority_queue<int, std::vector<int>, std::greater<int>> hi;  // min-heap
 
-    def addNum(self, num):
-        heapq.heappush(self.lo, -num)
-        # lo의 최댓값을 hi로 보냄 (정렬 유지)
-        heapq.heappush(self.hi, -heapq.heappop(self.lo))
-        # 크기 균형
-        if len(self.hi) > len(self.lo):
-            heapq.heappush(self.lo, -heapq.heappop(self.hi))
+public:
+    void addNum(int num) {
+        lo.push(num);
+        hi.push(lo.top()); lo.pop();  // lo의 max를 hi로
+        if (hi.size() > lo.size()) {
+            lo.push(hi.top()); hi.pop();
+        }
+    }
 
-    def findMedian(self):
-        if len(self.lo) > len(self.hi):
-            return -self.lo[0]
-        return (-self.lo[0] + self.hi[0]) / 2
+    double findMedian() {
+        if (lo.size() > hi.size()) return lo.top();
+        return (lo.top() + hi.top()) / 2.0;
+    }
+};
 ```
 
-**시간**: addNum $O(\log n)$, findMedian $O(1)$.
+시간: addNum $O(\log n)$, findMedian $O(1)$.
 </details>
 
 ---
 
- 다음: [03-spanning-tree-mst.md](./03-spanning-tree-mst.md) — 그래프에서 트리를 *뽑아내는* 두 가지 고전 알고리즘.
+다음: [03-spanning-tree-mst.md](./03-spanning-tree-mst.md) — 그래프에서 트리를 *뽑아내는* 두 가지 고전 알고리즘.

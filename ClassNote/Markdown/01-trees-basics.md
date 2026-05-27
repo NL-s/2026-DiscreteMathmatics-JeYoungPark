@@ -29,8 +29,8 @@
 |:--|:--|
 | (a) 연결 + 사이클 없음 | 위 원래 정의 |
 | (b) 두 정점 사이에 **유일한 경로** 존재 | path uniqueness |
-| (c) 연결이면서 $\|E\| = \|V\| - 1$ | "딱 맞는 간선 수" |
-| (d) 사이클 없으면서 $\|E\| = \|V\| - 1$ | "최대치까지 채운 숲" |
+| (c) 연결이면서 $\lvert E \rvert = \lvert V \rvert - 1$ | "딱 맞는 간선 수" |
+| (d) 사이클 없으면서 $\lvert E \rvert = \lvert V \rvert - 1$ | "최대치까지 채운 숲" |
 | (e) **minimally connected** | 어떤 간선이든 제거하면 분리됨 |
 | (f) **maximally acyclic** | 어떤 간선이든 추가하면 사이클 생김 |
 
@@ -66,7 +66,7 @@ graph TD
 | **Ancestor** | 위쪽으로 거슬러 가는 모든 노드 | `4`의 ancestor: `2, 1` |
 | **Descendant** | 아래로 내려가는 모든 노드 | `2`의 descendant: `4,5,7,8` |
 | **Leaf (외부 노드)** | 자식이 없는 노드 | `4, 6, 7, 8` |
-| **Internal (내부 노드)** | 자식이 ≥1개 | `1, 2, 3, 5` |
+| **Internal (내부 노드)** | 자식이 1개 이상 | `1, 2, 3, 5` |
 | **Depth(v)** | root에서 v까지의 거리 | depth(7)=3 |
 | **Height(v)** | v에서 가장 깊은 leaf까지의 거리 | height(1)=3 |
 | **Subtree** | 노드 v와 그 모든 descendant | `2`의 subtree = `{2,4,5,7,8}` |
@@ -94,10 +94,10 @@ $n$개의 정점을 가진 트리는 정확히 $n-1$개의 간선을 갖는다.
 
 **귀납법(induction)으로 증명.**
 
-- **Base** ($n=1$): 정점 1개, 간선 0개. $|E| = 0 = 1-1$. 
-- **Step**: $n$개 정점에 대해 성립한다고 가정. $n+1$개 정점 트리 $T$를 생각하자. 트리는 사이클이 없으므로 leaf가 존재한다(귀납적으로 증명 가능). leaf $v$와 그에 연결된 간선 $e$를 제거하면 정점 $n$개, 간선 $\|E\|-1$개의 트리가 된다. 귀납가정에서 $\|E\|-1 = n-1$, 즉 $\|E\| = n$. 
+- **Base** ($n=1$): 정점 1개, 간선 0개. $|E| = 0 = 1-1$.
+- **Step**: $n$개 정점에 대해 성립한다고 가정. $n+1$개 정점 트리 $T$를 생각하자. 트리는 사이클이 없으므로 leaf가 존재한다(귀납적으로 증명 가능). leaf $v$와 그에 연결된 간선 $e$를 제거하면 정점 $n$개, 간선 $|E|-1$개의 트리가 된다. 귀납가정에서 $|E|-1 = n-1$, 즉 $|E| = n$.
 
-따라서 모든 트리에 대해 $\|E\| = \|V\| - 1$. $\blacksquare$
+따라서 모든 트리에 대해 $|E| = |V| - 1$. $\blacksquare$
 </details>
 
 ### 정리 1.2 (Perfect binary tree의 leaf 수)
@@ -124,34 +124,36 @@ leaf는 마지막 레벨이므로 $2^h$개. $\blacksquare$
 ## 1.5 트리의 표현 (Representation)
 
 ### (a) 인접 리스트 (Week 5 복습)
-```python
-# 무방향 트리, 정점 0..n-1
-adj = [[] for _ in range(n)]
-adj[u].append(v)
-adj[v].append(u)
+```cpp
+// 무방향 트리, 정점 0..n-1
+std::vector<std::vector<int>> adj(n);
+adj[u].push_back(v);
+adj[v].push_back(u);
 ```
 
 ### (b) 부모 배열 (rooted tree)
-```python
-parent = [-1] * n  # parent[root] = -1
+```cpp
+std::vector<int> parent(n, -1);   // parent[root] = -1
 ```
 
 ### (c) 좌·우 자식 포인터 (binary tree)
-```python
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
+```cpp
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int v = 0, TreeNode* l = nullptr, TreeNode* r = nullptr)
+        : val(v), left(l), right(r) {}
+};
 ```
 
 ### (d) 배열 표현 (complete binary tree → heap)
-```python
-# 1-based indexing 기준
-# parent(i) = i // 2
-# left(i)   = 2*i
-# right(i)  = 2*i + 1
-heap = [None, 50, 30, 40, 10, 20, 35]  # 인덱스 0은 미사용
+```cpp
+// 1-based indexing 기준
+// parent(i) = i / 2
+// left(i)   = 2*i
+// right(i)  = 2*i + 1
+std::vector<int> heap = {0, 50, 30, 40, 10, 20, 35};  // 인덱스 0은 미사용
 ```
 
 ---
@@ -185,64 +187,73 @@ graph TD
 
 ### 1.6.2 코드 (재귀)
 
-```python
-def preorder(root):
-    if not root: return
-    print(root.val)          #  자기 자신
-    preorder(root.left)      #  왼쪽
-    preorder(root.right)     #  오른쪽
+```cpp
+void preorder(TreeNode* root) {
+    if (!root) return;
+    std::cout << root->val << " ";   // 자기 자신
+    preorder(root->left);            // 왼쪽
+    preorder(root->right);           // 오른쪽
+}
 
-def inorder(root):
-    if not root: return
-    inorder(root.left)
-    print(root.val)
-    inorder(root.right)
+void inorder(TreeNode* root) {
+    if (!root) return;
+    inorder(root->left);
+    std::cout << root->val << " ";
+    inorder(root->right);
+}
 
-def postorder(root):
-    if not root: return
-    postorder(root.left)
-    postorder(root.right)
-    print(root.val)
+void postorder(TreeNode* root) {
+    if (!root) return;
+    postorder(root->left);
+    postorder(root->right);
+    std::cout << root->val << " ";
+}
 ```
 
 ### 1.6.3 코드 (반복 — 스택 사용)
 
 재귀가 깊어지면 stack overflow 위험. 명시적 스택으로 안전하게:
 
-```python
-def preorder_iter(root):
-    if not root: return []
-    stack, out = [root], []
-    while stack:
-        node = stack.pop()
-        out.append(node.val)
-        # 오른쪽을 먼저 push해야 왼쪽이 먼저 pop됨
-        if node.right: stack.append(node.right)
-        if node.left:  stack.append(node.left)
-    return out
+```cpp
+std::vector<int> preorder_iter(TreeNode* root) {
+    std::vector<int> out;
+    if (!root) return out;
+    std::stack<TreeNode*> st;
+    st.push(root);
+    while (!st.empty()) {
+        TreeNode* node = st.top(); st.pop();
+        out.push_back(node->val);
+        // 오른쪽을 먼저 push해야 왼쪽이 먼저 pop됨
+        if (node->right) st.push(node->right);
+        if (node->left)  st.push(node->left);
+    }
+    return out;
+}
 ```
 
 ### 1.6.4 너비 우선 (BFS — level-order)
 
-```python
-from collections import deque
-
-def level_order(root):
-    if not root: return []
-    q, out = deque([root]), []
-    while q:
-        node = q.popleft()
-        out.append(node.val)
-        if node.left:  q.append(node.left)
-        if node.right: q.append(node.right)
-    return out
+```cpp
+std::vector<int> level_order(TreeNode* root) {
+    std::vector<int> out;
+    if (!root) return out;
+    std::queue<TreeNode*> q;
+    q.push(root);
+    while (!q.empty()) {
+        TreeNode* node = q.front(); q.pop();
+        out.push_back(node->val);
+        if (node->left)  q.push(node->left);
+        if (node->right) q.push(node->right);
+    }
+    return out;
+}
 ```
 
 위 트리의 BFS 결과: `1, 2, 3, 4, 5, 6`
 
 ---
 
-## 1.7 **왜** Inorder가 BST의 정렬 순서일까?
+## 1.7 왜 Inorder가 BST의 정렬 순서일까?
 
 이진 탐색 트리(BST)의 정의는 다음과 같습니다 (자세한 건 [02-bst-and-heap.md](./02-bst-and-heap.md)):
 > 모든 노드 $v$에 대해, **왼쪽 subtree의 모든 값 < $v$ < 오른쪽 subtree의 모든 값**
@@ -282,4 +293,4 @@ Inorder는 `L → N → R` 순서로 방문하므로,
 
 ---
 
- 다음: [02-bst-and-heap.md](./02-bst-and-heap.md)
+다음: [02-bst-and-heap.md](./02-bst-and-heap.md)

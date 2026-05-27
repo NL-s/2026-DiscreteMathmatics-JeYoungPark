@@ -53,27 +53,33 @@
   },
   "hotPaths": [
     {
-      "path": "ClassNote\\Markdown\\02-bst-and-heap.md",
-      "accessCount": 4,
-      "lastAccessed": 1779866327842,
-      "type": "file"
-    },
-    {
       "path": "ClassNote/Markdown",
-      "accessCount": 4,
-      "lastAccessed": 1779867668357,
+      "accessCount": 27,
+      "lastAccessed": 1779878119951,
       "type": "directory"
     },
     {
       "path": "ClassNote\\Markdown\\01-trees-basics.md",
-      "accessCount": 3,
-      "lastAccessed": 1779866296374,
+      "accessCount": 5,
+      "lastAccessed": 1779877493034,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\02-bst-and-heap.md",
+      "accessCount": 5,
+      "lastAccessed": 1779877563661,
       "type": "file"
     },
     {
       "path": "ClassNote\\Markdown\\03-spanning-tree-mst.md",
-      "accessCount": 3,
-      "lastAccessed": 1779866328993,
+      "accessCount": 5,
+      "lastAccessed": 1779878004191,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\09-regex.md",
+      "accessCount": 4,
+      "lastAccessed": 1779878099705,
       "type": "file"
     },
     {
@@ -107,12 +113,6 @@
       "type": "file"
     },
     {
-      "path": "ClassNote\\Markdown\\09-regex.md",
-      "accessCount": 2,
-      "lastAccessed": 1779867426431,
-      "type": "file"
-    },
-    {
       "path": "ClassNote\\Markdown\\10-pumping-lemma-chomsky.md",
       "accessCount": 2,
       "lastAccessed": 1779867521872,
@@ -129,6 +129,18 @@
       "accessCount": 2,
       "lastAccessed": 1779867619070,
       "type": "file"
+    },
+    {
+      "path": "ClassNote/Markdown/05-logic-circuits-kmap.md",
+      "accessCount": 2,
+      "lastAccessed": 1779877392935,
+      "type": "directory"
+    },
+    {
+      "path": "ClassNote/Markdown/09-regex.md",
+      "accessCount": 2,
+      "lastAccessed": 1779877393937,
+      "type": "directory"
     },
     {
       "path": "README.md",
@@ -179,12 +191,6 @@
       "type": "directory"
     },
     {
-      "path": "ClassNote/Markdown/05-logic-circuits-kmap.md",
-      "accessCount": 1,
-      "lastAccessed": 1779867650715,
-      "type": "directory"
-    },
-    {
       "path": "ClassNote/Markdown/06-automata-and-languages.md",
       "accessCount": 1,
       "lastAccessed": 1779867652160,
@@ -203,12 +209,6 @@
       "type": "directory"
     },
     {
-      "path": "ClassNote/Markdown/09-regex.md",
-      "accessCount": 1,
-      "lastAccessed": 1779867655936,
-      "type": "directory"
-    },
-    {
       "path": "ClassNote/Markdown/10-pumping-lemma-chomsky.md",
       "accessCount": 1,
       "lastAccessed": 1779867657462,
@@ -218,6 +218,12 @@
       "path": "ClassNote/Markdown/11-practice.md",
       "accessCount": 1,
       "lastAccessed": 1779867658706,
+      "type": "directory"
+    },
+    {
+      "path": "ClassNote/Markdown/01-trees-basics.md",
+      "accessCount": 1,
+      "lastAccessed": 1779877394595,
       "type": "directory"
     }
   ],
