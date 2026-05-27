@@ -1,0 +1,159 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1779849113379,
+  "projectRoot": "c:\\Users\\parkg\\Desktop\\DiscreteClass",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "ClassNote": {
+      "path": "ClassNote",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1779849113332,
+      "keyFiles": []
+    },
+    "ExampleCode": {
+      "path": "ExampleCode",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1779849113333,
+      "keyFiles": []
+    },
+    "Reference": {
+      "path": "Reference",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1779849113334,
+      "keyFiles": []
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "README.md",
+      "accessCount": 1,
+      "lastAccessed": 1779849453397,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\PDF\\1W.pdf",
+      "accessCount": 1,
+      "lastAccessed": 1779849462263,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\PDF\\2W.pdf",
+      "accessCount": 1,
+      "lastAccessed": 1779849463001,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\PDF\\3W.pdf",
+      "accessCount": 1,
+      "lastAccessed": 1779849463438,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\README.md",
+      "accessCount": 1,
+      "lastAccessed": 1779849592568,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\01-trees-basics.md",
+      "accessCount": 1,
+      "lastAccessed": 1779849662687,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\02-bst-and-heap.md",
+      "accessCount": 1,
+      "lastAccessed": 1779849739693,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\03-spanning-tree-mst.md",
+      "accessCount": 1,
+      "lastAccessed": 1779849820241,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\04-boolean-algebra.md",
+      "accessCount": 1,
+      "lastAccessed": 1779849895721,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\05-logic-circuits-kmap.md",
+      "accessCount": 1,
+      "lastAccessed": 1779849989211,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\06-automata-and-languages.md",
+      "accessCount": 1,
+      "lastAccessed": 1779850066370,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\07-dfa.md",
+      "accessCount": 1,
+      "lastAccessed": 1779850168443,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\08-nfa-equivalence.md",
+      "accessCount": 1,
+      "lastAccessed": 1779850258734,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\09-regex.md",
+      "accessCount": 1,
+      "lastAccessed": 1779850346644,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\10-pumping-lemma-chomsky.md",
+      "accessCount": 1,
+      "lastAccessed": 1779850460097,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\11-practice.md",
+      "accessCount": 1,
+      "lastAccessed": 1779850573869,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote/Markdown",
+      "accessCount": 1,
+      "lastAccessed": 1779850589768,
+      "type": "directory"
+    }
+  ],
+  "userDirectives": []
+}
