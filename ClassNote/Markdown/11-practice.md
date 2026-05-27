@@ -1,6 +1,6 @@
 # 11 · 종합 실습 & 학습 정리
 
-> **5개 챕터를 마쳤습니다.** 이번엔 챕터를 가로지르는 종합 문제와, 학습 전체를 회고하는 자료입니다.
+> 5개 챕터를 마쳤습니다. 이번엔 챕터를 가로지르는 종합 문제와, 학습 전체를 회고하는 자료입니다.
 
 ---
 
@@ -43,13 +43,13 @@ graph TD
 ## 11.2 챕터별 핵심 공식·정의 카드
 
 <details>
-<summary> Trees</summary>
+<summary>Trees</summary>
 
 - 트리 동치 정의: 연결 + 사이클 없음 ⇔ 두 정점 사이 유일 경로 ⇔ 연결 + $|E|=|V|-1$
 - Perfect binary tree: 노드 $2^{h+1}-1$개, leaf $2^h$개
 - 순회: Preorder(NLR), Inorder(LNR), Postorder(LRN), BFS(level)
 - BST: 좌 < 자기 < 우, in-order = 정렬
-- Heap: complete binary tree, parent ≥ children (max-heap)
+- Heap: complete binary tree, parent >= children (max-heap)
 - Trie: 간선에 문자, 검색 O(L) 단어 수와 무관
 - MST: Kruskal (간선 정렬 + Union-Find), Prim (정점 확장 + heap), 둘 다 $O(E \log V)$
 - Cut property: cut 중 최소 가중치 간선은 어떤 MST에 포함
@@ -57,7 +57,7 @@ graph TD
 </details>
 
 <details>
-<summary> Boolean Algebra</summary>
+<summary>Boolean Algebra</summary>
 
 - 부울 대수 = $(B, +, \cdot, ', 0, 1)$, $B = \{0,1\}$
 - 대응: $+$↔OR↔$\lor$, $\cdot$↔AND↔$\land$, $'$↔NOT↔$\neg$
@@ -71,7 +71,7 @@ graph TD
 </details>
 
 <details>
-<summary> Automata</summary>
+<summary>Automata</summary>
 
 - DFA = $(Q, \Sigma, \delta, q_0, F)$, $\delta: Q \times \Sigma \to Q$
 - NFA: $\delta: Q \times \Sigma_\varepsilon \to \mathcal{P}(Q)$
@@ -87,25 +87,23 @@ graph TD
 
 ## 11.3 종합 도전 문제 — 챕터를 가로지르는 사고
 
-###  Problem 1 — 트리에서 BFS = NFA?
+### Problem 1 — 트리에서 BFS = NFA?
 
 **질문**: BFS로 트리를 순회할 때, 큐(queue)는 어떤 면에서 NFA의 시뮬레이션과 닮았을까?
 
 <details>
 <summary>해설</summary>
 
-NFA를 시뮬레이션할 때는 "현재 가능한 상태들의 집합"을 추적합니다 (8장 8.9절). BFS도 매 단계 "현재 깊이의 노드들의 집합"을 큐에 가지고 있죠.
+NFA를 시뮬레이션할 때는 "현재 가능한 상태들의 집합"을 추적합니다 (8장). BFS도 매 단계 "현재 깊이의 노드들의 집합"을 큐에 가지고 있습니다.
 
 차이:
-- NFA의 집합은 **자동 합쳐짐** (같은 상태는 한 번만)
-- BFS의 큐는 **노드별 구분** 유지
+- NFA의 집합은 자동 합쳐짐 (같은 상태는 한 번만)
+- BFS의 큐는 노드별 구분 유지
 
-그러나 둘 다 **레벨(또는 입력 글자) 단위 동기적 진행**이라는 점에서 본질적으로 같은 패러다임.
-
-응용: NFA 시뮬레이션은 사실 BFS의 한 종류 — "현재 상태"에서 "다음 가능한 상태"로 확장.
+그러나 둘 다 **레벨(또는 입력 글자) 단위 동기적 진행**이라는 점에서 본질적으로 같은 패러다임. NFA 시뮬레이션은 사실 BFS의 한 종류.
 </details>
 
-###  Problem 2 — 부울 함수로 표현되는 회로 vs 정규 언어
+### Problem 2 — 부울 함수로 표현되는 회로 vs 정규 언어
 
 **질문**: $n$비트 입력을 받아 0/1 출력하는 부울 회로는 모든 정규 언어를 표현할 수 있는가?
 
@@ -116,14 +114,14 @@ NFA를 시뮬레이션할 때는 "현재 가능한 상태들의 집합"을 추�
 
 **하지만** "정규 언어"는 임의 길이 문자열을 다룹니다 ($\Sigma^*$). 고정 크기 회로 하나로는 임의 길이 입력을 못 받음 → 입력 길이마다 다른 회로 필요.
 
-**해결책**: 회로 family $\{C_n\}_{n=0}^\infty$ — 각 $n$마다 $n$비트 입력 회로. 이걸 **uniform circuit family**로 만들면, *그 자체로 DFA에 대응됨* (Sipser 교과서 참고).
+**해결책**: 회로 family $\{C_n\}_{n=0}^\infty$ — 각 $n$마다 $n$비트 입력 회로. 이걸 uniform circuit family로 만들면, 그 자체로 DFA에 대응됩니다 (Sipser 교과서 참고).
 
 결론: 길이별로 회로를 *변화시킬 수 있다면* (= 시퀀셜 회로, 즉 메모리 추가) 정규 언어 = DFA = 시퀀셜 회로.
 
-> **부울 회로(조합) + 메모리 = 시퀀셜 회로 = FSM = DFA.** 디지털 시스템 설계의 본질.
+> 부울 회로(조합) + 메모리 = 시퀀셜 회로 = FSM = DFA. 디지털 시스템 설계의 본질.
 </details>
 
-###  Problem 3 — Trie와 DFA의 관계
+### Problem 3 — Trie와 DFA의 관계
 
 **질문**: 유한 문자열의 집합 $S$를 인식하는 최소 DFA는, $S$에 대한 Trie와 어떻게 다른가?
 
@@ -131,15 +129,15 @@ NFA를 시뮬레이션할 때는 "현재 가능한 상태들의 집합"을 추�
 <summary>해설</summary>
 
 Trie:
-- $S$의 모든 단어의 prefix를 노드로 갖음
+- $S$의 모든 단어의 prefix를 노드로 가짐
 - $|S|$의 총 길이 = 트라이 크기
 
 DFA:
 - 같은 언어 인식
-- **suffix를 공유하는 부분도 합쳐짐**
+- suffix를 공유하는 부분도 합쳐짐
 
 예: $S = \{cat, car, bat, bar\}$
-- Trie: 12개 노드 (각 단어 4글자 × 4 - 공통 1글자 c, b 시작...)
+- Trie: 12개 노드 (각 단어 4글자 * 4 - 공통 시작...)
 - 최소 DFA: 더 적음. `at`과 `ar`의 마지막 부분이 공유될 수 있음.
 
 이걸 **DAWG (Directed Acyclic Word Graph)** 또는 **finite-state transducer**라고 부릅니다. 사전 압축, 자연어 처리 형태소 분석에 사용.
@@ -147,14 +145,14 @@ DFA:
 > Trie는 prefix만 압축, 최소 DFA는 suffix도 압축.
 </details>
 
-###  Problem 4 — MST와 Cut Property → Greedy의 일반화
+### Problem 4 — MST와 Cut Property — Greedy의 일반화
 
 **질문**: Kruskal/Prim이 정확히 같은 MST를 출력하지 않을 수도 있는 이유는?
 
 <details>
 <summary>해설</summary>
 
-가중치가 모두 다르면 → **MST는 유일**.
+가중치가 모두 다르면 → MST는 유일.
 
 가중치가 같은 간선이 있으면 → 여러 MST 가능. Kruskal과 Prim은 같은 가중치 간선들 사이 선택 순서가 달라 다른 결과 낼 수 있음.
 
@@ -165,32 +163,32 @@ DFA:
 응용: 알고리즘 디버깅 시 "내 MST가 표준 답과 다르네?" — 가중치 합만 같으면 둘 다 정답.
 </details>
 
-###  Problem 5 — Chomsky 계층과 프로그래밍 언어
+### Problem 5 — Chomsky 계층과 프로그래밍 언어
 
 **질문**: 왜 대부분의 프로그래밍 언어 문법은 Context-Free이지만, 의미는 그렇지 않은가?
 
 <details>
 <summary>해설</summary>
 
-**문법(syntax)**: 괄호 매칭, 중첩된 블록, 산술식 — 전부 CFL. CFG로 정의 가능 → **PDA로 파싱 가능**.
+**문법(syntax)**: 괄호 매칭, 중첩된 블록, 산술식 — 전부 CFL. CFG로 정의 가능 → PDA로 파싱 가능.
 
 **의미(semantics)**:
 - 변수 사용 전 선언 — context-sensitive
 - 타입 일치 검사 — context-sensitive  
-- 무한 루프 종료 검사 — **결정 불가능** (정지 문제)
+- 무한 루프 종료 검사 — 결정 불가능 (정지 문제)
 
 그래서 컴파일러는:
-1. **Lexer (DFA)** — 토큰 분해
-2. **Parser (PDA)** — 문법 트리 구성
-3. **Semantic analyzer (CSL 영역)** — 타입 검사, 변수 binding
-4. **Optimizer/CodeGen (heuristic)** — 결정 불가능 영역도 손대지만 *근사적*으로만
+1. Lexer (DFA) — 토큰 분해
+2. Parser (PDA) — 문법 트리 구성
+3. Semantic analyzer (CSL 영역) — 타입 검사, 변수 binding
+4. Optimizer/CodeGen (heuristic) — 결정 불가능 영역도 손대지만 *근사적*으로만
 
-**Chomsky 계층이 컴파일러 구조를 결정**합니다.
+Chomsky 계층이 컴파일러 구조를 결정합니다.
 </details>
 
 ---
 
-## 11.4 LeetCode 50문제 종합 트랙 — 학습 로드맵
+## 11.4 LeetCode 종합 트랙 — 학습 로드맵
 
 ### Tier 1 — 기본기 (10문제)
 | 주제 | 문제 |
@@ -250,8 +248,8 @@ DFA:
 - **Visualgo.net** — 트리 알고리즘 시각화
 
 ### 도구
-- **Python `lark`, `pyparsing`** — CFG 파서 라이브러리
-- **`re2`** (Google) — 안전한 정규식 엔진
+- **ANTLR**, **Lark** — CFG 파서 라이브러리
+- **Google RE2** — 안전한 정규식 엔진 (Thompson NFA 기반)
 - **Graphviz** — DFA/트리 다이어그램 자동 생성
 
 ---
@@ -280,10 +278,10 @@ flowchart LR
 
 ### 여러분이 이제 할 수 있는 일
 
-1. **이진 트리 문제를 보면** 순회의 종류를 떠올린다
-2. **복잡한 if문을 보면** K-map으로 단순화를 시도한다
-3. **파싱 문제를 보면** "이건 정규? CFL?"을 먼저 묻는다
-4. **알고리즘이 안 풀리면** "이게 결정 불가능에 가까운가?"를 의심한다
+1. 이진 트리 문제를 보면 순회의 종류를 떠올린다
+2. 복잡한 if문을 보면 K-map으로 단순화를 시도한다
+3. 파싱 문제를 보면 "이건 정규? CFL?"을 먼저 묻는다
+4. 알고리즘이 안 풀리면 "이게 결정 불가능에 가까운가?"를 의심한다
 
 ---
 
@@ -299,16 +297,16 @@ flowchart LR
 - **디지털 시스템 설계** — 부울 회로, FSM, 동기 시퀀셜 시스템
 - **이론 컴퓨터 과학** — 형식 검증, 모델 체킹, 정리 증명
 
-> 모든 길이 이산수학에서 시작합니다.
+모든 길이 이산수학에서 시작합니다.
 
 ---
 
 ## 11.8 감사의 말
 
-> **8주짜리 강의를 직접 듣지 못해도, 이 자료가 강의 시간만큼의 가치를 전할 수 있도록 정성껏 작성했습니다.** 막히는 부분은 언제든 이메일로 질문 주세요. 다음 학기에서 또 만나기를 기대합니다.
+> 8주짜리 강의를 직접 듣지 못해도, 이 자료가 강의 시간만큼의 가치를 전할 수 있도록 정성껏 작성했습니다. 막히는 부분은 언제든 이메일로 질문 주세요.
 
 — 박제영 (25102543) · `recognize@seoultech.ac.kr`
 
 ---
 
- 처음으로 돌아가기: [README.md](./README.md)
+처음으로 돌아가기: [README.md](./README.md)

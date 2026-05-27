@@ -1,13 +1,7 @@
 # 01 · 트리(Tree)의 기초와 순회
 
-> **선수 학습**: Week 3 — Relations, Week 5(=3W.pdf) — Graph Theory
-> 트리는 **"가장 단순한 연결 그래프"**입니다. 그래프의 일반 정의에서 *사이클*만 빼면 곧장 트리가 됩니다.
-
----
 
 ## 1.1 왜 트리인가?
-
-컴퓨터 과학에서 트리를 빼면 다음이 다 무너집니다:
 
 - **파일 시스템** — 디렉토리는 트리
 - **DOM / HTML / JSON** — 모든 마크업은 트리
@@ -18,7 +12,7 @@
 - **Git의 커밋 히스토리** — DAG지만 본질은 트리
 - **결정 트리, 게임 트리, 미니맥스** — 인공지능의 기반
 
-> 그래프가 "쌍-관계의 통합 언어"였다면, **트리는 "계층(hierarchy)의 통합 언어"**입니다.
+> 그래프가 "쌍-관계의 통합 언어"였다면, **트리는 "계층(hierarchy)의 통합 언어"** 입니다.
 
 ---
 
@@ -40,7 +34,6 @@
 | (e) **minimally connected** | 어떤 간선이든 제거하면 분리됨 |
 | (f) **maximally acyclic** | 어떤 간선이든 추가하면 사이클 생김 |
 
-### 핵심 공식
 
 $$
 \boxed{\;|E| = |V| - 1\;}
@@ -78,6 +71,8 @@ graph TD
 | **Height(v)** | v에서 가장 깊은 leaf까지의 거리 | height(1)=3 |
 | **Subtree** | 노드 v와 그 모든 descendant | `2`의 subtree = `{2,4,5,7,8}` |
 
+> 용어 같은 경우에는 가볍게 보시고 넘어가주시면 됩니다.
+
 ### 정의 1.2 (m-ary tree)
 모든 노드의 자식 수가 $\le m$인 rooted tree. 특히 $m=2$이면 **binary tree(이진 트리)**.
 
@@ -99,8 +94,8 @@ $n$개의 정점을 가진 트리는 정확히 $n-1$개의 간선을 갖는다.
 
 **귀납법(induction)으로 증명.**
 
-- **Base** ($n=1$): 정점 1개, 간선 0개. $|E| = 0 = 1-1$. ✓
-- **Step**: $n$개 정점에 대해 성립한다고 가정. $n+1$개 정점 트리 $T$를 생각하자. 트리는 사이클이 없으므로 leaf가 존재한다(귀납적으로 증명 가능). leaf $v$와 그에 연결된 간선 $e$를 제거하면 정점 $n$개, 간선 $\|E\|-1$개의 트리가 된다. 귀납가정에서 $\|E\|-1 = n-1$, 즉 $\|E\| = n$. ✓
+- **Base** ($n=1$): 정점 1개, 간선 0개. $|E| = 0 = 1-1$. 
+- **Step**: $n$개 정점에 대해 성립한다고 가정. $n+1$개 정점 트리 $T$를 생각하자. 트리는 사이클이 없으므로 leaf가 존재한다(귀납적으로 증명 가능). leaf $v$와 그에 연결된 간선 $e$를 제거하면 정점 $n$개, 간선 $\|E\|-1$개의 트리가 된다. 귀납가정에서 $\|E\|-1 = n-1$, 즉 $\|E\| = n$. 
 
 따라서 모든 트리에 대해 $\|E\| = \|V\| - 1$. $\blacksquare$
 </details>
@@ -193,9 +188,9 @@ graph TD
 ```python
 def preorder(root):
     if not root: return
-    print(root.val)          # ① 자기 자신
-    preorder(root.left)      # ② 왼쪽
-    preorder(root.right)     # ③ 오른쪽
+    print(root.val)          #  자기 자신
+    preorder(root.left)      #  왼쪽
+    preorder(root.right)     #  오른쪽
 
 def inorder(root):
     if not root: return
@@ -247,7 +242,7 @@ def level_order(root):
 
 ---
 
-## 1.7 잠깐, **왜** Inorder가 BST의 정렬 순서일까?
+## 1.7 **왜** Inorder가 BST의 정렬 순서일까?
 
 이진 탐색 트리(BST)의 정의는 다음과 같습니다 (자세한 건 [02-bst-and-heap.md](./02-bst-and-heap.md)):
 > 모든 노드 $v$에 대해, **왼쪽 subtree의 모든 값 < $v$ < 오른쪽 subtree의 모든 값**
@@ -274,7 +269,7 @@ Inorder는 `L → N → R` 순서로 방문하므로,
 
 ---
 
-## 1.9 빠른 자기 점검
+## 1.9 practice
 
 1. 정점 100개짜리 트리의 간선 수는?  
    <details><summary>답</summary>99개. 트리는 항상 $|E| = |V|-1$.</details>
@@ -287,4 +282,4 @@ Inorder는 `L → N → R` 순서로 방문하므로,
 
 ---
 
- 다음: [02-bst-and-heap.md](./02-bst-and-heap.md) — BST, Heap, Trie로 들어갑니다.
+ 다음: [02-bst-and-heap.md](./02-bst-and-heap.md)

@@ -22,9 +22,9 @@ $$
 | 모든 (state,input) 정의 | 필수 | 선택 |
 
 ### "비결정적"의 의미
-같은 입력에 대해 여러 갈래로 동시에 진행 가능. 마지막에 **수용 상태에 도달하는 경로가 단 하나라도 있으면 수용**.
+같은 입력에 대해 여러 갈래로 동시에 진행 가능. 마지막에 수용 상태에 도달하는 경로가 단 하나라도 있으면 수용.
 
-> 비유: 마법사가 미래를 미리 보고 옳은 길을 항상 선택. (실제 구현은 모든 가능성을 동시 시뮬레이션.)
+비유: 마법사가 미래를 미리 보고 옳은 길을 항상 선택. (실제 구현은 모든 가능성을 동시 시뮬레이션.)
 
 ---
 
@@ -47,11 +47,11 @@ stateDiagram-v2
 - $q_0$: 아직 매칭 시작 안 함 (자기 자신으로 a/b/c 모두)
 - $q_1, q_2, q_3$: `a`, `ab`, `abc`까지 매칭됨
 
-**DFA로 만들려면?** 진행 중인 부분 매치 상태 4개($\emptyset, \text{a}, \text{ab}, \text{abc}$)를 다 추적해야 → 더 복잡.
+DFA로 만들려면? 진행 중인 부분 매치 상태 4개($\emptyset, \text{a}, \text{ab}, \text{abc}$)를 다 추적해야 → 더 복잡.
 
 ### 8.2.2 $\varepsilon$-전이
 
-$\varepsilon$-전이는 입력 없이 자동으로 일어남.
+$\varepsilon$-전이는 입력 없이 자동으로 일어납니다.
 
 ```mermaid
 stateDiagram-v2
@@ -65,7 +65,7 @@ stateDiagram-v2
     q2: q2 (accept: even 1s)
 ```
 
-이 NFA는 `0*` 또는 `1*`를 인식. $\varepsilon$-전이로 시작 시점에 어느 쪽을 갈지 *선택*함.
+이 NFA는 `0*` 또는 `1*`를 인식. $\varepsilon$-전이로 시작 시점에 어느 쪽을 갈지 *선택*합니다.
 
 ---
 
@@ -88,17 +88,17 @@ $$
 L(N) = \{w \in \Sigma^* : \hat\delta_N(q_0, w) \cap F \neq \emptyset\}
 $$
 
-**끝 상태 집합 중 수용 상태가 하나라도 있으면 수용.**
+끝 상태 집합 중 수용 상태가 하나라도 있으면 수용.
 
 ---
 
-## 8.4 **NFA = DFA** — Rabin-Scott 정리
+## 8.4 NFA = DFA — Rabin-Scott 정리
 
 ### 정리 8.1 (Subset Construction, 1959)
 모든 NFA는 같은 언어를 인식하는 **DFA로 변환할 수 있다.**
 
 ### 핵심 아이디어
-NFA가 "동시에 여러 상태에 있을 수 있다"면, **DFA의 상태를 NFA의 상태들의 부분집합**으로 잡자.
+NFA가 "동시에 여러 상태에 있을 수 있다"면, DFA의 상태를 NFA의 상태들의 부분집합으로 잡습니다.
 
 ### 알고리즘 (Subset Construction)
 
@@ -121,16 +121,16 @@ NFA 상태: $\{q_0, q_1, q_2, q_3\}$, 알파벳 $\{a, b, c\}$.
 | $\{q_0\}$ | $\{q_0, q_1\}$ | $\{q_0\}$ | $\{q_0\}$ |
 | $\{q_0, q_1\}$ | $\{q_0, q_1\}$ | $\{q_0, q_2\}$ | $\{q_0\}$ |
 | $\{q_0, q_2\}$ | $\{q_0, q_1\}$ | $\{q_0\}$ | $\{q_0, q_3\}$ |
-| $\{q_0, q_3\}$ ✓ | $\{q_0, q_1\}$ | $\{q_0\}$ | $\{q_0\}$ |
+| $\{q_0, q_3\}$ (accept) | $\{q_0, q_1\}$ | $\{q_0\}$ | $\{q_0\}$ |
 
 수용 상태: $q_3$를 포함하는 모든 집합 → $\{q_0, q_3\}$.
 
-DFA 4개 상태로 같은 언어 인식. ✓
+DFA 4개 상태로 같은 언어 인식.
 
-### 상태 폭발(State Explosion)
+### 상태 폭발 (State Explosion)
 최악의 경우 NFA의 상태가 $n$개면 DFA는 **$2^n$개**까지 폭발 가능. 실제로 polynomial size NFA가 exponential DFA로 변환되는 예시 존재.
 
-> **NFA는 더 작고, DFA는 더 빠릅니다.** 이 트레이드오프 때문에 정규식 엔진은 둘 다 사용.
+> NFA는 더 작고, DFA는 더 빠릅니다. 이 트레이드오프 때문에 정규식 엔진은 둘 다 사용합니다.
 
 ---
 
@@ -138,7 +138,7 @@ DFA 4개 상태로 같은 언어 인식. ✓
 
 모든 DFA는 이미 NFA입니다 ($\delta_D(q, a) \in Q$를 $\{\delta_D(q,a)\}$로 보면 됨).
 
-### 결론 — **DFA와 NFA는 정확히 같은 클래스의 언어를 인식**
+### 결론 — DFA와 NFA는 정확히 같은 클래스의 언어를 인식
 
 $$
 \mathsf{DFA} = \mathsf{NFA} = \mathsf{REG}
@@ -148,7 +148,7 @@ $$
 
 ## 8.6 NFA로 닫힘성 증명이 쉬워지는 이유
 
-7장에서 정규 언어가 $\cup$, $\cap$, $L \cdot L'$, $L^*$에 닫혀있다고 언급. NFA를 쓰면 증명이 **그림 한 장**으로 끝납니다.
+7장에서 정규 언어가 $\cup$, $\cap$, $L \cdot L'$, $L^*$에 닫혀있다고 언급했습니다. NFA를 쓰면 증명이 그림 한 장으로 끝납니다.
 
 ### 8.6.1 합집합 $L_1 \cup L_2$
 
@@ -196,99 +196,119 @@ stateDiagram-v2
 
 새 시작 = 새 수용 ($\varepsilon$ 인식). $M$이 끝나면 다시 $M$의 시작으로 루프.
 
-> **NFA의 진정한 가치**: 표현력이 늘진 않지만, *증명과 구성*이 압도적으로 간결.
+> NFA의 진정한 가치는 표현력이 늘진 않지만, 증명과 구성이 압도적으로 간결하다는 점입니다.
 
 ---
 
-## 8.7 Python으로 NFA 구현
+## 8.7 C++로 NFA 구현
 
-```python
-class NFA:
-    def __init__(self, states, alphabet, delta, start, accept):
-        """
-        delta: {(state, symbol_or_None): set of next states}
-               None을 epsilon으로 사용
-        """
-        self.states = set(states)
-        self.alphabet = set(alphabet)
-        self.delta = delta
-        self.start = start
-        self.accept = set(accept)
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
 
-    def epsilon_closure(self, S):
-        stack = list(S)
-        closure = set(S)
-        while stack:
-            q = stack.pop()
-            for nxt in self.delta.get((q, None), set()):
-                if nxt not in closure:
-                    closure.add(nxt)
-                    stack.append(nxt)
-        return closure
+struct NFA {
+    set<string> states;
+    set<char> alphabet;
+    // (state, symbol) -> set of next states.  symbol == 0 means epsilon.
+    map<pair<string,char>, set<string>> delta;
+    string start;
+    set<string> accept;
 
-    def step(self, S, ch):
-        nxt = set()
-        for q in S:
-            nxt |= self.delta.get((q, ch), set())
-        return self.epsilon_closure(nxt)
+    set<string> epsilon_closure(set<string> S) const {
+        vector<string> stack(S.begin(), S.end());
+        while (!stack.empty()) {
+            string q = stack.back(); stack.pop_back();
+            auto it = delta.find({q, 0});
+            if (it == delta.end()) continue;
+            for (const auto& nxt : it->second) {
+                if (S.insert(nxt).second) stack.push_back(nxt);
+            }
+        }
+        return S;
+    }
 
-    def accepts(self, w: str) -> bool:
-        S = self.epsilon_closure({self.start})
-        for ch in w:
-            S = self.step(S, ch)
-            if not S:
-                return False
-        return bool(S & self.accept)
+    set<string> step(const set<string>& S, char ch) const {
+        set<string> nxt;
+        for (const auto& q : S) {
+            auto it = delta.find({q, ch});
+            if (it != delta.end())
+                nxt.insert(it->second.begin(), it->second.end());
+        }
+        return epsilon_closure(nxt);
+    }
 
+    bool accepts(const string& w) const {
+        set<string> S = epsilon_closure({start});
+        for (char ch : w) {
+            S = step(S, ch);
+            if (S.empty()) return false;
+        }
+        for (const auto& q : S) if (accept.count(q)) return true;
+        return false;
+    }
+};
 
-# 예: "ab"를 부분문자열로 포함하는 NFA
-nfa = NFA(
-    states={"q0","q1","q2"},
-    alphabet={"a","b"},
-    delta={
-        ("q0","a"): {"q0","q1"},
-        ("q0","b"): {"q0"},
-        ("q1","b"): {"q2"},
-        ("q2","a"): {"q2"},
-        ("q2","b"): {"q2"},
-    },
-    start="q0",
-    accept={"q2"},
-)
-print(nfa.accepts("xab"))    # False (x는 알파벳 외)
-print(nfa.accepts("aab"))    # True
-print(nfa.accepts("bba"))    # False
-print(nfa.accepts("bbab"))   # True
+int main() {
+    NFA nfa;
+    nfa.states   = {"q0", "q1", "q2"};
+    nfa.alphabet = {'a', 'b'};
+    nfa.delta    = {
+        {{"q0", 'a'}, {"q0", "q1"}},
+        {{"q0", 'b'}, {"q0"}},
+        {{"q1", 'b'}, {"q2"}},
+        {{"q2", 'a'}, {"q2"}},
+        {{"q2", 'b'}, {"q2"}},
+    };
+    nfa.start  = "q0";
+    nfa.accept = {"q2"};
+
+    cout << nfa.accepts("aab")  << "\n"; // 1
+    cout << nfa.accepts("bba")  << "\n"; // 0
+    cout << nfa.accepts("bbab") << "\n"; // 1
+}
 ```
 
 ### Subset Construction을 코드로
 
-```python
-def nfa_to_dfa(nfa: NFA):
-    start_set = frozenset(nfa.epsilon_closure({nfa.start}))
-    states = {start_set}
-    queue = [start_set]
-    delta = {}
-    accept = set()
+```cpp
+DFA nfa_to_dfa(const NFA& nfa) {
+    DFA dfa;
+    dfa.alphabet = nfa.alphabet;
 
-    while queue:
-        S = queue.pop()
-        if S & nfa.accept:
-            accept.add(S)
-        for ch in nfa.alphabet:
-            T = frozenset(nfa.step(S, ch))
-            delta[(S, ch)] = T
-            if T not in states and T:
-                states.add(T)
-                queue.append(T)
+    auto set_to_name = [](const set<string>& s) {
+        string name = "{";
+        for (const auto& q : s) { name += q; name += ","; }
+        if (name.back() == ',') name.back() = '}';
+        else name += "}";
+        return name;
+    };
 
-    return DFA(  # 7장의 DFA 클래스
-        states=states,
-        alphabet=nfa.alphabet,
-        delta=delta,
-        start=start_set,
-        accept=accept,
-    )
+    set<string> startSet = nfa.epsilon_closure({nfa.start});
+    string startName = set_to_name(startSet);
+    dfa.start = startName;
+
+    map<string, set<string>> stateMap = {{startName, startSet}};
+    queue<string> q; q.push(startName);
+
+    while (!q.empty()) {
+        string name = q.front(); q.pop();
+        const set<string>& S = stateMap[name];
+        dfa.states.insert(name);
+        for (const auto& s : S)
+            if (nfa.accept.count(s)) { dfa.accept.insert(name); break; }
+        for (char ch : nfa.alphabet) {
+            set<string> T = nfa.step(S, ch);
+            if (T.empty()) continue;
+            string tName = set_to_name(T);
+            dfa.delta[{name, ch}] = tName;
+            if (!stateMap.count(tName)) {
+                stateMap[tName] = T;
+                q.push(tName);
+            }
+        }
+    }
+    return dfa;
+}
 ```
 
 ---
@@ -305,7 +325,7 @@ def nfa_to_dfa(nfa: NFA):
    <details><summary>답</summary>거부. 수용 상태에 도달하는 경로가 단 하나라도 있어야 수용.</details>
 
 4. "비결정성"을 실제 컴퓨터가 어떻게 시뮬레이션하나?  
-   <details><summary>답</summary>현재 가능한 상태들의 **집합**을 유지. 입력 한 글자마다 집합을 갱신. 이게 결국 subset construction의 lazy 버전.</details>
+   <details><summary>답</summary>현재 가능한 상태들의 집합을 유지. 입력 한 글자마다 집합을 갱신. 이게 결국 subset construction의 lazy 버전.</details>
 
 ---
 
@@ -313,119 +333,117 @@ def nfa_to_dfa(nfa: NFA):
 
 ### Thompson NFA + Subset Construction (POSIX, RE2, Rust regex)
 - NFA로 컴파일 → 시뮬레이션 (subset 추적)
-- 최악 시간: **$O(nm)$** ($n$=입력 길이, $m$=정규식 길이)
-- ReDoS(정규식 서비스 거부 공격) **불가능**
+- 최악 시간: $O(nm)$ ($n$=입력 길이, $m$=정규식 길이)
+- ReDoS(정규식 서비스 거부 공격) 불가능
 - 단점: backreference 등 일부 확장 기능 미지원
 
 ### Backtracking (PCRE, Java, Python, JavaScript)
 - 재귀 호출로 NFA 시뮬레이션
-- 최악 시간 **지수**: catastrophic backtracking → **ReDoS 위험**
+- 최악 시간 **지수**: catastrophic backtracking → ReDoS 위험
 - 장점: backreference, lookahead 등 풍부한 기능
 
-> Cloudflare의 2019년 대규모 장애가 정규식의 catastrophic backtracking 때문이었습니다. 그 이후로 그들은 Rust regex (Thompson)로 마이그레이션.
+Cloudflare의 2019년 대규모 장애가 정규식의 catastrophic backtracking 때문이었습니다. 그 이후로 그들은 Rust regex (Thompson)로 마이그레이션했습니다.
 
 ---
 
 ## 8.10 실습 예제 — LeetCode
 
-###  [LeetCode 10. Regular Expression Matching](https://leetcode.com/problems/regular-expression-matching/)
+### [LeetCode 10. Regular Expression Matching](https://leetcode.com/problems/regular-expression-matching/)
 
 > `.`와 `*`를 지원하는 정규식 매칭 구현.
 
 <details>
 <summary>풀이 보기 (DP, 사실상 NFA 시뮬레이션)</summary>
 
-```python
-class Solution:
-    def isMatch(self, s, p):
-        n, m = len(s), len(p)
-        dp = [[False] * (m + 1) for _ in range(n + 1)]
-        dp[0][0] = True
-        # 빈 문자열이 p[:j]에 매칭되는 경우: a*b*c* 같은 경우
-        for j in range(2, m + 1):
-            if p[j-1] == '*':
-                dp[0][j] = dp[0][j-2]
-        for i in range(1, n + 1):
-            for j in range(1, m + 1):
-                if p[j-1] == '*':
-                    # 0번 매칭 or 1번 이상 매칭
-                    dp[i][j] = dp[i][j-2] or (
-                        (p[j-2] == '.' or p[j-2] == s[i-1]) and dp[i-1][j]
-                    )
-                elif p[j-1] == '.' or p[j-1] == s[i-1]:
-                    dp[i][j] = dp[i-1][j-1]
-        return dp[n][m]
+```cpp
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int n = s.size(), m = p.size();
+        vector<vector<bool>> dp(n + 1, vector<bool>(m + 1, false));
+        dp[0][0] = true;
+        for (int j = 2; j <= m; ++j)
+            if (p[j-1] == '*') dp[0][j] = dp[0][j-2];
+        for (int i = 1; i <= n; ++i)
+            for (int j = 1; j <= m; ++j) {
+                if (p[j-1] == '*') {
+                    bool match = (p[j-2] == '.' || p[j-2] == s[i-1]);
+                    dp[i][j] = dp[i][j-2] || (match && dp[i-1][j]);
+                } else if (p[j-1] == '.' || p[j-1] == s[i-1]) {
+                    dp[i][j] = dp[i-1][j-1];
+                }
+            }
+        return dp[n][m];
+    }
+};
 ```
 
-**해설**: 이 DP는 사실 NFA를 시뮬레이션하는 것의 다른 형태. `dp[i][j]`는 "NFA가 입력 첫 i글자를 처리 후 패턴 첫 j글자 상태에 있을 수 있는가?". 정확히 subset construction 비슷한 동작.
+이 DP는 사실 NFA를 시뮬레이션하는 것의 다른 형태. `dp[i][j]`는 "NFA가 입력 첫 i글자 처리 후 패턴 첫 j글자 상태에 있을 수 있는가?". 정확히 subset construction 비슷한 동작.
 </details>
 
-###  [LeetCode 44. Wildcard Matching](https://leetcode.com/problems/wildcard-matching/)
+### [LeetCode 44. Wildcard Matching](https://leetcode.com/problems/wildcard-matching/)
 
 > `?`와 `*`을 지원하는 wildcard 매칭.
 
 <details>
 <summary>풀이 보기</summary>
 
-```python
-class Solution:
-    def isMatch(self, s, p):
-        n, m = len(s), len(p)
-        dp = [[False] * (m + 1) for _ in range(n + 1)]
-        dp[0][0] = True
-        for j in range(1, m + 1):
-            if p[j-1] == '*':
-                dp[0][j] = dp[0][j-1]
-        for i in range(1, n + 1):
-            for j in range(1, m + 1):
-                if p[j-1] == '*':
-                    # *가 빈 문자열 / 한 글자 이상 매칭
-                    dp[i][j] = dp[i][j-1] or dp[i-1][j]
-                elif p[j-1] == '?' or p[j-1] == s[i-1]:
-                    dp[i][j] = dp[i-1][j-1]
-        return dp[n][m]
+```cpp
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int n = s.size(), m = p.size();
+        vector<vector<bool>> dp(n + 1, vector<bool>(m + 1, false));
+        dp[0][0] = true;
+        for (int j = 1; j <= m; ++j)
+            if (p[j-1] == '*') dp[0][j] = dp[0][j-1];
+        for (int i = 1; i <= n; ++i)
+            for (int j = 1; j <= m; ++j) {
+                if (p[j-1] == '*')
+                    dp[i][j] = dp[i][j-1] || dp[i-1][j];
+                else if (p[j-1] == '?' || p[j-1] == s[i-1])
+                    dp[i][j] = dp[i-1][j-1];
+            }
+        return dp[n][m];
+    }
+};
 ```
 
-**해설**: 10번보다 단순. `*`이 "임의의 문자열 매칭"이라 NFA로 만들면 $\varepsilon$-루프가 명확.
+10번보다 단순. `*`이 "임의의 문자열 매칭"이라 NFA로 만들면 $\varepsilon$-루프가 명확.
 </details>
 
-###  [LeetCode 28. Find the Index of the First Occurrence](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/)
+### [LeetCode 28. Find the Index of the First Occurrence](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/)
 
 > 문자열에서 부분 문자열의 첫 위치 찾기 (`strstr`).
 
 <details>
 <summary>풀이 보기 (KMP — DFA 사고)</summary>
 
-```python
-class Solution:
-    def strStr(self, haystack, needle):
-        if not needle:
-            return 0
-        # KMP failure 함수 (DFA의 일종)
-        n, m = len(haystack), len(needle)
-        fail = [0] * m
-        k = 0
-        for i in range(1, m):
-            while k > 0 and needle[k] != needle[i]:
-                k = fail[k-1]
-            if needle[k] == needle[i]:
-                k += 1
-            fail[i] = k
-        # 매칭
-        k = 0
-        for i in range(n):
-            while k > 0 and needle[k] != haystack[i]:
-                k = fail[k-1]
-            if needle[k] == haystack[i]:
-                k += 1
-            if k == m:
-                return i - m + 1
-        return -1
+```cpp
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        if (needle.empty()) return 0;
+        int n = haystack.size(), m = needle.size();
+        vector<int> fail(m, 0);
+        for (int i = 1, k = 0; i < m; ++i) {
+            while (k > 0 && needle[k] != needle[i]) k = fail[k-1];
+            if (needle[k] == needle[i]) ++k;
+            fail[i] = k;
+        }
+        for (int i = 0, k = 0; i < n; ++i) {
+            while (k > 0 && needle[k] != haystack[i]) k = fail[k-1];
+            if (needle[k] == haystack[i]) ++k;
+            if (k == m) return i - m + 1;
+        }
+        return -1;
+    }
+};
 ```
 
-**해설**: KMP의 `fail` 배열은 사실상 **needle을 인식하는 DFA의 전이 함수**의 압축 표현입니다. "지금까지 매칭한 prefix"가 상태.
+KMP의 `fail` 배열은 사실상 needle을 인식하는 DFA의 전이 함수의 압축 표현입니다. "지금까지 매칭한 prefix"가 상태.
 </details>
 
 ---
 
- 다음: [09-regex.md](./09-regex.md) — 정규 표현식, 그리고 RE ⇔ FA의 동치성.
+다음: [09-regex.md](./09-regex.md) — 정규 표현식, 그리고 RE와 FA의 동치성.

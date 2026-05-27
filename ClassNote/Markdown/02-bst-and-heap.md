@@ -201,9 +201,9 @@ print(heapq.heappop(h))  # 1
 | push | $O(\log n)$ |
 | pop | $O(\log n)$ |
 | peek (top) | $O(1)$ |
-| build heap (배열 → 힙) | $O(n)$ ⚡ |
+| build heap (배열 → 힙) | $O(n)$ !! |
 
-> $O(n)$ build heap이 흥미로운 결과입니다. 각 노드에서 $O(\log n)$이 아니라, **bottom-up으로 sift-down하면 전체가 $O(n)$**으로 줄어듭니다. 이는 트리의 높이별 노드 수가 기하급수적으로 감소하기 때문 ($\sum h \cdot 2^{-h}$가 수렴).
+> $O(n)$ build heap이 흥미로운 결과입니다. 각 노드에서 $O(\log n)$이 아니라, **bottom-up으로 sift-down하면 전체가 $O(n)$** 으로 줄어듭니다. 이는 트리의 높이별 노드 수가 기하급수적으로 감소하기 때문 ($\sum h \cdot 2^{-h}$가 수렴).
 
 ---
 

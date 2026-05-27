@@ -53,6 +53,84 @@
   },
   "hotPaths": [
     {
+      "path": "ClassNote\\Markdown\\02-bst-and-heap.md",
+      "accessCount": 4,
+      "lastAccessed": 1779866327842,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote/Markdown",
+      "accessCount": 4,
+      "lastAccessed": 1779867668357,
+      "type": "directory"
+    },
+    {
+      "path": "ClassNote\\Markdown\\01-trees-basics.md",
+      "accessCount": 3,
+      "lastAccessed": 1779866296374,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\03-spanning-tree-mst.md",
+      "accessCount": 3,
+      "lastAccessed": 1779866328993,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\04-boolean-algebra.md",
+      "accessCount": 2,
+      "lastAccessed": 1779866427206,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\05-logic-circuits-kmap.md",
+      "accessCount": 2,
+      "lastAccessed": 1779866507441,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\06-automata-and-languages.md",
+      "accessCount": 2,
+      "lastAccessed": 1779866574542,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\07-dfa.md",
+      "accessCount": 2,
+      "lastAccessed": 1779866664657,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\08-nfa-equivalence.md",
+      "accessCount": 2,
+      "lastAccessed": 1779866745952,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\09-regex.md",
+      "accessCount": 2,
+      "lastAccessed": 1779867426431,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\10-pumping-lemma-chomsky.md",
+      "accessCount": 2,
+      "lastAccessed": 1779867521872,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\11-practice.md",
+      "accessCount": 2,
+      "lastAccessed": 1779867612858,
+      "type": "file"
+    },
+    {
+      "path": "ClassNote\\Markdown\\README.md",
+      "accessCount": 2,
+      "lastAccessed": 1779867619070,
+      "type": "file"
+    },
+    {
       "path": "README.md",
       "accessCount": 1,
       "lastAccessed": 1779849453397,
@@ -77,81 +155,69 @@
       "type": "file"
     },
     {
-      "path": "ClassNote\\Markdown\\README.md",
+      "path": "ClassNote/Markdown/README.md",
       "accessCount": 1,
-      "lastAccessed": 1779849592568,
-      "type": "file"
+      "lastAccessed": 1779867626714,
+      "type": "directory"
     },
     {
-      "path": "ClassNote\\Markdown\\01-trees-basics.md",
+      "path": "ClassNote/Markdown/02-bst-and-heap.md",
       "accessCount": 1,
-      "lastAccessed": 1779849662687,
-      "type": "file"
+      "lastAccessed": 1779867641417,
+      "type": "directory"
     },
     {
-      "path": "ClassNote\\Markdown\\02-bst-and-heap.md",
+      "path": "ClassNote/Markdown/03-spanning-tree-mst.md",
       "accessCount": 1,
-      "lastAccessed": 1779849739693,
-      "type": "file"
+      "lastAccessed": 1779867642435,
+      "type": "directory"
     },
     {
-      "path": "ClassNote\\Markdown\\03-spanning-tree-mst.md",
+      "path": "ClassNote/Markdown/04-boolean-algebra.md",
       "accessCount": 1,
-      "lastAccessed": 1779849820241,
-      "type": "file"
+      "lastAccessed": 1779867649110,
+      "type": "directory"
     },
     {
-      "path": "ClassNote\\Markdown\\04-boolean-algebra.md",
+      "path": "ClassNote/Markdown/05-logic-circuits-kmap.md",
       "accessCount": 1,
-      "lastAccessed": 1779849895721,
-      "type": "file"
+      "lastAccessed": 1779867650715,
+      "type": "directory"
     },
     {
-      "path": "ClassNote\\Markdown\\05-logic-circuits-kmap.md",
+      "path": "ClassNote/Markdown/06-automata-and-languages.md",
       "accessCount": 1,
-      "lastAccessed": 1779849989211,
-      "type": "file"
+      "lastAccessed": 1779867652160,
+      "type": "directory"
     },
     {
-      "path": "ClassNote\\Markdown\\06-automata-and-languages.md",
+      "path": "ClassNote/Markdown/07-dfa.md",
       "accessCount": 1,
-      "lastAccessed": 1779850066370,
-      "type": "file"
+      "lastAccessed": 1779867653232,
+      "type": "directory"
     },
     {
-      "path": "ClassNote\\Markdown\\07-dfa.md",
+      "path": "ClassNote/Markdown/08-nfa-equivalence.md",
       "accessCount": 1,
-      "lastAccessed": 1779850168443,
-      "type": "file"
+      "lastAccessed": 1779867654848,
+      "type": "directory"
     },
     {
-      "path": "ClassNote\\Markdown\\08-nfa-equivalence.md",
+      "path": "ClassNote/Markdown/09-regex.md",
       "accessCount": 1,
-      "lastAccessed": 1779850258734,
-      "type": "file"
+      "lastAccessed": 1779867655936,
+      "type": "directory"
     },
     {
-      "path": "ClassNote\\Markdown\\09-regex.md",
+      "path": "ClassNote/Markdown/10-pumping-lemma-chomsky.md",
       "accessCount": 1,
-      "lastAccessed": 1779850346644,
-      "type": "file"
+      "lastAccessed": 1779867657462,
+      "type": "directory"
     },
     {
-      "path": "ClassNote\\Markdown\\10-pumping-lemma-chomsky.md",
+      "path": "ClassNote/Markdown/11-practice.md",
       "accessCount": 1,
-      "lastAccessed": 1779850460097,
-      "type": "file"
-    },
-    {
-      "path": "ClassNote\\Markdown\\11-practice.md",
-      "accessCount": 1,
-      "lastAccessed": 1779850573869,
-      "type": "file"
-    },
-    {
-      "path": "ClassNote/Markdown",
-      "accessCount": 1,
-      "lastAccessed": 1779850589768,
+      "lastAccessed": 1779867658706,
       "type": "directory"
     }
   ],

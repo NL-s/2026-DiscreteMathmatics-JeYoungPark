@@ -1,6 +1,6 @@
 # 06 · 오토마타와 형식 언어 (Automata & Formal Languages)
 
-> "*계산이란 무엇인가?*"라는 가장 근본적인 질문에 대답하기 위해 만든 **추상 기계**가 오토마타입니다. Turing 이전 시대부터 컴퓨터의 이론적 본질을 묻기 위한 도구였습니다.
+> "*계산이란 무엇인가?*"라는 가장 근본적인 질문에 대답하기 위해 만든 추상 기계가 오토마타입니다. Turing 이전 시대부터 컴퓨터의 이론적 본질을 묻기 위한 도구였습니다.
 
 ---
 
@@ -22,11 +22,11 @@
 ### 이론적 의의
 
 오토마타는 **계산 능력의 계층(Chomsky hierarchy)**을 정의합니다:
-- 가장 단순한 기계: **유한 오토마타(FA)** ← 이번 주의 주인공
+- 가장 단순한 기계: **유한 오토마타(FA)** — 이번 주의 주인공
 - 그 위: **푸시다운 오토마타(PDA)** — 괄호 매칭 가능
 - 가장 강력: **튜링 기계(TM)** — 알고리즘이라 부르는 모든 것
 
-> "어떤 문제는 유한 오토마타로 풀 수 있고, 어떤 문제는 절대 못 푼다." 이걸 명확히 구분하는 게 오토마타 이론의 핵심 결과.
+어떤 문제는 유한 오토마타로 풀 수 있고, 어떤 문제는 절대 못 풉니다. 이걸 명확히 구분하는 게 오토마타 이론의 핵심 결과.
 
 ---
 
@@ -43,7 +43,7 @@
 ### 정의 6.2 (String, 문자열)
 $\Sigma$의 기호들의 **유한한** 나열.
 
-- $\varepsilon$ (epsilon): **빈 문자열** (기호 0개) — 매우 중요한 특수 케이스
+- $\varepsilon$ (epsilon): 빈 문자열 (기호 0개) — 매우 중요한 특수 케이스
 - $|w|$: 문자열 $w$의 길이 (기호 개수). $|\varepsilon|=0$.
 - $w \cdot v$ 또는 $wv$: 두 문자열의 **연결(concatenation)**. `"abc" · "de" = "abcde"`
 - $w^n$: $w$를 $n$번 연결. $w^0 = \varepsilon$, $w^3 = www$.
@@ -69,13 +69,13 @@ L \subseteq \Sigma^*
 $$
 
 언어란 그저 "어떤 문자열들의 모임"입니다. 예:
-- $L_1 = \{0, 01, 011, 0111, \dots\} = \{0^n 1^n : n \ge 0\}$ — *이건 실은 regular가 아닙니다*
+- $L_1 = \{0, 01, 011, 0111, \dots\} = \{0^n 1^n : n \ge 0\}$ — 이건 실은 regular가 아닙니다
 - $L_2 = \{w \in \{0,1\}^* : w \text{ ends with } 1\}$
 - $L_3 = $ "올바른 Python 프로그램의 집합"
 - $L_4 = \emptyset$ (빈 언어)
-- $L_5 = \{\varepsilon\}$ (빈 문자열만 포함하는 언어 — $\emptyset$와 다름!)
+- $L_5 = \{\varepsilon\}$ (빈 문자열만 포함하는 언어 — $\emptyset$와 다름)
 
-> **언어 = 집합**. Week 2의 모든 집합 연산이 그대로 쓰입니다 ($\cup, \cap, \setminus$ 등).
+언어 = 집합. Week 2의 모든 집합 연산이 그대로 쓰입니다 ($\cup, \cap, \setminus$ 등).
 
 ---
 
@@ -101,11 +101,11 @@ $$
 L^* = \bigcup_{n=0}^{\infty} L^n = L^0 \cup L^1 \cup L^2 \cup \dots
 $$
 
-**"$L$의 원소를 0번 이상 연결한 모든 문자열"**.
+"$L$의 원소를 0번 이상 연결한 모든 문자열".
 
 예: $L = \{a, b\}$이면 $L^* = \{\varepsilon, a, b, aa, ab, ba, bb, aaa, \dots\}$.
 
-특히: **$\Sigma^* = \Sigma$의 Kleene star** (이게 표기의 유래).
+특히: $\Sigma^* = \Sigma$의 Kleene star (이게 표기의 유래).
 
 ### 6.3.5 Kleene Plus
 $$
@@ -117,26 +117,24 @@ $L^*$와 같지만 $\varepsilon$이 빠짐 (단, $\varepsilon \in L$인 경우�
 
 ## 6.4 결정 문제(Decision Problem)와 언어
 
-### 핵심 통찰
+**모든 "예/아니오 문제"는 언어 문제와 동치입니다.**
 
-> **모든 "예/아니오 문제"는 언어 문제와 동치다.**
-
-문제: "정수 $n$은 소수인가?"
+문제: "정수 $n$은 소수인가?"  
 ↔ 언어: $L_{\text{prime}} = \{n \in \mathbb{N} : n \text{ is prime}\}$의 멤버십 판정.
 
-문제: "문자열 $w$에 0이 짝수 개 있는가?"
+문제: "문자열 $w$에 0이 짝수 개 있는가?"  
 ↔ 언어: $L_{\text{even-0}} = \{w \in \{0,1\}^* : w$에 0이 짝수 개$\}$의 멤버십.
 
-문제: "이 Python 코드는 syntactically 올바른가?"
-↔ 언어: $L_{\text{Python}}$의 멤버십.
+문제: "이 C++ 코드는 syntactically 올바른가?"  
+↔ 언어: $L_{\text{C++}}$의 멤버십.
 
-> 이게 오토마타 이론이 **모든** 계산 문제를 다룰 수 있는 이유.
+이게 오토마타 이론이 **모든** 계산 문제를 다룰 수 있는 이유입니다.
 
 ---
 
 ## 6.5 언어의 분류 — Chomsky Hierarchy 미리보기
 
-언어는 **어떤 종류의 기계가 그것을 인식할 수 있느냐**에 따라 계층이 있습니다.
+언어는 어떤 종류의 기계가 그것을 인식할 수 있느냐에 따라 계층이 있습니다.
 
 ```mermaid
 graph TD
@@ -152,9 +150,9 @@ graph TD
 | 1 | Context-Sensitive | LBA | $\{a^n b^n c^n\}$ |
 | 0 | Recursively Enumerable | TM | 정지 문제 등 |
 
-이번 강의의 주 무대는 **Type-3, Regular Languages**입니다. 가장 단순하지만, 가장 자주 쓰임 (정규 표현식!).
+이번 강의의 주 무대는 Type-3, Regular Languages입니다. 가장 단순하지만, 가장 자주 쓰임 (정규 표현식).
 
-[10-pumping-lemma-chomsky.md](./10-pumping-lemma-chomsky.md)에서 자세히.
+[10-pumping-lemma-chomsky.md](./10-pumping-lemma-chomsky.md)에서 자세히 다룹니다.
 
 ---
 
@@ -185,16 +183,16 @@ stateDiagram-v2
 
 ## 6.7 잠깐, 왜 *유한*인가?
 
-기계가 **유한한 메모리(상태)**만 가지고 무한한 길이의 문자열을 처리해야 한다는 제약.
+기계가 **유한한 메모리(상태)**만 가지고 무한한 길이의 문자열을 처리해야 한다는 제약입니다.
 
 이 제약이 만드는 결과:
-- 인식 가능한 언어 = **Regular Languages** (가장 작은 클래스)
+- 인식 가능한 언어 = Regular Languages (가장 작은 클래스)
 - 인식 **불가능**한 예시:
   - $\{0^n 1^n : n \ge 0\}$ — 0의 개수와 1의 개수가 같은 문자열들
   - 균형 잡힌 괄호 — 깊이를 세야 하는데 상태가 부족
   - 회문(palindrome)
 
-> 이건 단순한 한계가 아니라, **무엇이 가능한지에 대한 정확한 수학적 답변**입니다. → 펌핑 보조정리(10번 파일).
+이건 단순한 한계가 아니라, **무엇이 가능한지에 대한 정확한 수학적 답변**입니다. 펌핑 보조정리에서 증명합니다 (10번 파일).
 
 ---
 
@@ -218,50 +216,60 @@ stateDiagram-v2
    <details><summary>답</summary>$2^3 = 8$. 길이 3인 모든 문자열.</details>
 
 2. $\emptyset^* = ?$  
-   <details><summary>답</summary>$\{\varepsilon\}$. $\emptyset^0 = \{\varepsilon\}$가 들어가기 때문. **빈 언어와 다름!**</details>
+   <details><summary>답</summary>$\{\varepsilon\}$. $\emptyset^0 = \{\varepsilon\}$가 들어가기 때문. 빈 언어와 다릅니다.</details>
 
 3. 언어 $L = \{a, b\}$의 $L^2$를 모두 나열하라.  
    <details><summary>답</summary>$\{aa, ab, ba, bb\}$. 4개.</details>
 
 4. "올바른 산술식의 집합"은 Regular한가?  
-   <details><summary>답</summary>아닙니다. 괄호 깊이가 임의로 깊어질 수 있어 유한 상태로 추적 불가. **Context-free** 언어입니다.</details>
+   <details><summary>답</summary>아닙니다. 괄호 깊이가 임의로 깊어질 수 있어 유한 상태로 추적 불가. Context-free 언어입니다.</details>
 
 5. 모든 유한 언어는 Regular인가?  
-   <details><summary>답</summary>예. 유한 개의 문자열이 있으면 그것들을 정확히 받는 DFA를 *만들 수 있음* (각 문자열마다 한 줄의 상태).</details>
+   <details><summary>답</summary>예. 유한 개의 문자열이 있으면 그것들을 정확히 받는 DFA를 만들 수 있음 (각 문자열마다 한 줄의 상태).</details>
 
 ---
 
-## 6.10 Python으로 언어 다루기 — 워밍업
+## 6.10 C++로 언어 다루기 — 워밍업
 
-```python
-def kleene_star(L, n):
-    """L의 0..n번 연결 결과를 반환"""
-    result = {""}  # L^0
-    current = {""}
-    for i in range(n):
-        current = {x + y for x in current for y in L}
-        result |= current
-    return result
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
 
-L = {"a", "ab"}
-print(kleene_star(L, 3))
-# {'', 'a', 'ab', 'aa', 'aab', 'aba', 'abab', 'aaa', 'aaab', ...}
-```
+// L의 0..n번 연결까지 모두 모은 집합 반환
+set<string> kleene_star(const set<string>& L, int n) {
+    set<string> result = {""};   // L^0
+    set<string> current = {""};
+    for (int i = 0; i < n; ++i) {
+        set<string> next;
+        for (const auto& x : current)
+            for (const auto& y : L)
+                next.insert(x + y);
+        current = next;
+        for (const auto& s : current) result.insert(s);
+    }
+    return result;
+}
 
-```python
-def concat(L1, L2):
-    return {x + y for x in L1 for y in L2}
+// 두 언어의 연결
+set<string> concat(const set<string>& L1, const set<string>& L2) {
+    set<string> out;
+    for (const auto& x : L1)
+        for (const auto& y : L2)
+            out.insert(x + y);
+    return out;
+}
 
-def intersect(L1, L2):
-    return L1 & L2  # 집합 그대로
-
-L1 = {"a", "ab"}
-L2 = {"c", "d"}
-print(concat(L1, L2))   # {'ac', 'ad', 'abc', 'abd'}
+int main() {
+    set<string> L1 = {"a", "ab"};
+    set<string> L2 = {"c", "d"};
+    for (const auto& s : concat(L1, L2)) cout << s << " ";
+    // ac ad abc abd
+    cout << "\n";
+}
 ```
 
 > 언어는 그저 *문자열의 집합*임을 기억하세요.
 
 ---
 
- 다음: [07-dfa.md](./07-dfa.md) — 첫 번째 진짜 기계, DFA.
+다음: [07-dfa.md](./07-dfa.md) — 첫 번째 진짜 기계, DFA.
