@@ -264,4 +264,4 @@ print(concat(L1, L2))   # {'ac', 'ad', 'abc', 'abd'}
 
 ---
 
-➡️ 다음: [07-dfa.md](./07-dfa.md) — 첫 번째 진짜 기계, DFA.
+ 다음: [07-dfa.md](./07-dfa.md) — 첫 번째 진짜 기계, DFA.

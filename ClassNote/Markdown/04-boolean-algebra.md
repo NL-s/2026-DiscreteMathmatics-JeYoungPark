@@ -298,4 +298,4 @@ print(sop_from_truth(table, ['x','y','z']))
 
 ---
 
-➡️ 다음: [05-logic-circuits-kmap.md](./05-logic-circuits-kmap.md) — 부울 함수가 회로가 되고, K-map으로 단순화하는 방법.
+ 다음: [05-logic-circuits-kmap.md](./05-logic-circuits-kmap.md) — 부울 함수가 회로가 되고, K-map으로 단순화하는 방법.

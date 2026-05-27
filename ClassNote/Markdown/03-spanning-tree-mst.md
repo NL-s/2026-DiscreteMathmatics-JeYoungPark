@@ -269,7 +269,7 @@ $O(|E| + |V| \log |V|)$ — 이론적으로 흥미롭지만 실전에서는 bina
 
 ## 3.9 실습 예제 — LeetCode
 
-### 🔰 [LeetCode 1971. Find if Path Exists in Graph](https://leetcode.com/problems/find-if-path-exists-in-graph/)
+###  [LeetCode 1971. Find if Path Exists in Graph](https://leetcode.com/problems/find-if-path-exists-in-graph/)
 
 > 무방향 그래프에서 두 정점 사이에 경로가 있는지 판별.
 
@@ -299,7 +299,7 @@ class Solution:
 **해설**: MST 알고리즘 자체는 아니지만, Union-Find가 *연결성*을 판단하는 핵심 도구임을 익히는 문제. Kruskal의 핵심 building block입니다.
 </details>
 
-### 🥈 [LeetCode 1584. Min Cost to Connect All Points](https://leetcode.com/problems/min-cost-to-connect-all-points/)
+###  [LeetCode 1584. Min Cost to Connect All Points](https://leetcode.com/problems/min-cost-to-connect-all-points/)
 
 > 2D 평면 위의 점들이 주어졌을 때, 모든 점을 연결하는 최소 비용은? (간선 비용은 맨해튼 거리)
 
@@ -336,7 +336,7 @@ class Solution:
 **시간**: $O(n^2 \log n)$
 </details>
 
-### 🥈 [LeetCode 1135. Connecting Cities With Minimum Cost](https://leetcode.com/problems/connecting-cities-with-minimum-cost/) (Premium)
+###  [LeetCode 1135. Connecting Cities With Minimum Cost](https://leetcode.com/problems/connecting-cities-with-minimum-cost/) (Premium)
 
 대안 무료 문제: [LeetCode 547. Number of Provinces](https://leetcode.com/problems/number-of-provinces/) — 연결 성분 세기 (Union-Find 연습)
 
@@ -365,7 +365,7 @@ class Solution:
 연결 성분의 개수 = Union-Find에서 root가 다른 개수.
 </details>
 
-### 🥇 [LeetCode 778. Swim in Rising Water](https://leetcode.com/problems/swim-in-rising-water/)
+###  [LeetCode 778. Swim in Rising Water](https://leetcode.com/problems/swim-in-rising-water/)
 
 > 격자에서 좌상단에서 우하단으로 이동. 각 칸의 시간을 지나야만 통과. 최소 출발 시간은?
 
@@ -397,4 +397,4 @@ class Solution:
 
 ---
 
-➡️ 다음: [04-boolean-algebra.md](./04-boolean-algebra.md) — 부울 대수의 세계로.
+ 다음: [04-boolean-algebra.md](./04-boolean-algebra.md) — 부울 대수의 세계로.

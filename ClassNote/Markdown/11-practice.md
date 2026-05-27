@@ -43,7 +43,7 @@ graph TD
 ## 11.2 챕터별 핵심 공식·정의 카드
 
 <details>
-<summary>📌 Trees</summary>
+<summary> Trees</summary>
 
 - 트리 동치 정의: 연결 + 사이클 없음 ⇔ 두 정점 사이 유일 경로 ⇔ 연결 + $|E|=|V|-1$
 - Perfect binary tree: 노드 $2^{h+1}-1$개, leaf $2^h$개
@@ -57,7 +57,7 @@ graph TD
 </details>
 
 <details>
-<summary>📌 Boolean Algebra</summary>
+<summary> Boolean Algebra</summary>
 
 - 부울 대수 = $(B, +, \cdot, ', 0, 1)$, $B = \{0,1\}$
 - 대응: $+$↔OR↔$\lor$, $\cdot$↔AND↔$\land$, $'$↔NOT↔$\neg$
@@ -71,7 +71,7 @@ graph TD
 </details>
 
 <details>
-<summary>📌 Automata</summary>
+<summary> Automata</summary>
 
 - DFA = $(Q, \Sigma, \delta, q_0, F)$, $\delta: Q \times \Sigma \to Q$
 - NFA: $\delta: Q \times \Sigma_\varepsilon \to \mathcal{P}(Q)$
@@ -87,7 +87,7 @@ graph TD
 
 ## 11.3 종합 도전 문제 — 챕터를 가로지르는 사고
 
-### 🥈 Problem 1 — 트리에서 BFS = NFA?
+###  Problem 1 — 트리에서 BFS = NFA?
 
 **질문**: BFS로 트리를 순회할 때, 큐(queue)는 어떤 면에서 NFA의 시뮬레이션과 닮았을까?
 
@@ -105,7 +105,7 @@ NFA를 시뮬레이션할 때는 "현재 가능한 상태들의 집합"을 추�
 응용: NFA 시뮬레이션은 사실 BFS의 한 종류 — "현재 상태"에서 "다음 가능한 상태"로 확장.
 </details>
 
-### 🥇 Problem 2 — 부울 함수로 표현되는 회로 vs 정규 언어
+###  Problem 2 — 부울 함수로 표현되는 회로 vs 정규 언어
 
 **질문**: $n$비트 입력을 받아 0/1 출력하는 부울 회로는 모든 정규 언어를 표현할 수 있는가?
 
@@ -123,7 +123,7 @@ NFA를 시뮬레이션할 때는 "현재 가능한 상태들의 집합"을 추�
 > **부울 회로(조합) + 메모리 = 시퀀셜 회로 = FSM = DFA.** 디지털 시스템 설계의 본질.
 </details>
 
-### 🥇 Problem 3 — Trie와 DFA의 관계
+###  Problem 3 — Trie와 DFA의 관계
 
 **질문**: 유한 문자열의 집합 $S$를 인식하는 최소 DFA는, $S$에 대한 Trie와 어떻게 다른가?
 
@@ -147,7 +147,7 @@ DFA:
 > Trie는 prefix만 압축, 최소 DFA는 suffix도 압축.
 </details>
 
-### 🥇 Problem 4 — MST와 Cut Property → Greedy의 일반화
+###  Problem 4 — MST와 Cut Property → Greedy의 일반화
 
 **질문**: Kruskal/Prim이 정확히 같은 MST를 출력하지 않을 수도 있는 이유는?
 
@@ -165,7 +165,7 @@ DFA:
 응용: 알고리즘 디버깅 시 "내 MST가 표준 답과 다르네?" — 가중치 합만 같으면 둘 다 정답.
 </details>
 
-### 🥇 Problem 5 — Chomsky 계층과 프로그래밍 언어
+###  Problem 5 — Chomsky 계층과 프로그래밍 언어
 
 **질문**: 왜 대부분의 프로그래밍 언어 문법은 Context-Free이지만, 의미는 그렇지 않은가?
 
@@ -311,4 +311,4 @@ flowchart LR
 
 ---
 
-⬅️ 처음으로 돌아가기: [README.md](./README.md)
+ 처음으로 돌아가기: [README.md](./README.md)

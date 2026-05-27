@@ -245,7 +245,7 @@ if isActive:
 
 > 부울 연산은 LeetCode에서 **비트 연산** 문제로 자주 등장합니다.
 
-### 🔰 [LeetCode 191. Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)
+###  [LeetCode 191. Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)
 
 > 정수의 이진 표현에서 1의 개수를 세시오 (popcount).
 
@@ -265,7 +265,7 @@ class Solution:
 **해설**: `n & (n-1)`은 가장 오른쪽의 1을 0으로 만듭니다 (부울 대수의 응용). 1의 개수만큼만 루프.
 </details>
 
-### 🔰 [LeetCode 136. Single Number](https://leetcode.com/problems/single-number/)
+###  [LeetCode 136. Single Number](https://leetcode.com/problems/single-number/)
 
 > 어떤 원소가 정확히 한 번, 나머지는 모두 두 번씩 나타나는 배열에서 그 원소를 찾으시오.
 
@@ -291,7 +291,7 @@ class Solution:
 이 풀이는 **부울 대수 (XOR의 대수적 성질)**가 실용 알고리즘의 핵심임을 보여주는 명장면.
 </details>
 
-### 🥈 [LeetCode 137. Single Number II](https://leetcode.com/problems/single-number-ii/)
+###  [LeetCode 137. Single Number II](https://leetcode.com/problems/single-number-ii/)
 
 > 한 원소는 한 번, 나머지는 **세 번씩** 나타날 때. 그 원소는?
 
@@ -313,7 +313,7 @@ class Solution:
 이 문제는 **부울 함수 설계**의 정수입니다.
 </details>
 
-### 🥈 [LeetCode 1342. Number of Steps to Reduce a Number to Zero](https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero-to-zero/)
+###  [LeetCode 1342. Number of Steps to Reduce a Number to Zero](https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero-to-zero/)
 
 > 짝수면 2로 나누고, 홀수면 1을 빼서 0까지 만드는 데 필요한 step 수.
 
@@ -336,7 +336,7 @@ class Solution:
 **보너스**: `bin(num).count('1') + num.bit_length() - 1` (마지막 1비트는 빼기만으로 끝나기 때문에 -1).
 </details>
 
-### 🥇 [LeetCode 201. Bitwise AND of Numbers Range](https://leetcode.com/problems/bitwise-and-of-numbers-range/)
+###  [LeetCode 201. Bitwise AND of Numbers Range](https://leetcode.com/problems/bitwise-and-of-numbers-range/)
 
 > $[m, n]$ 범위의 모든 정수를 AND한 결과는?
 
@@ -359,4 +359,4 @@ class Solution:
 
 ---
 
-➡️ 다음: [06-automata-and-languages.md](./06-automata-and-languages.md) — 이제 진짜 *기계*로 들어갑니다.
+ 다음: [06-automata-and-languages.md](./06-automata-and-languages.md) — 이제 진짜 *기계*로 들어갑니다.

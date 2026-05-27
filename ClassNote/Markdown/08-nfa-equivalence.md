@@ -328,7 +328,7 @@ def nfa_to_dfa(nfa: NFA):
 
 ## 8.10 실습 예제 — LeetCode
 
-### 🥈 [LeetCode 10. Regular Expression Matching](https://leetcode.com/problems/regular-expression-matching/)
+###  [LeetCode 10. Regular Expression Matching](https://leetcode.com/problems/regular-expression-matching/)
 
 > `.`와 `*`를 지원하는 정규식 매칭 구현.
 
@@ -360,7 +360,7 @@ class Solution:
 **해설**: 이 DP는 사실 NFA를 시뮬레이션하는 것의 다른 형태. `dp[i][j]`는 "NFA가 입력 첫 i글자를 처리 후 패턴 첫 j글자 상태에 있을 수 있는가?". 정확히 subset construction 비슷한 동작.
 </details>
 
-### 🥇 [LeetCode 44. Wildcard Matching](https://leetcode.com/problems/wildcard-matching/)
+###  [LeetCode 44. Wildcard Matching](https://leetcode.com/problems/wildcard-matching/)
 
 > `?`와 `*`을 지원하는 wildcard 매칭.
 
@@ -389,7 +389,7 @@ class Solution:
 **해설**: 10번보다 단순. `*`이 "임의의 문자열 매칭"이라 NFA로 만들면 $\varepsilon$-루프가 명확.
 </details>
 
-### 🥈 [LeetCode 28. Find the Index of the First Occurrence](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/)
+###  [LeetCode 28. Find the Index of the First Occurrence](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/)
 
 > 문자열에서 부분 문자열의 첫 위치 찾기 (`strstr`).
 
@@ -428,4 +428,4 @@ class Solution:
 
 ---
 
-➡️ 다음: [09-regex.md](./09-regex.md) — 정규 표현식, 그리고 RE ⇔ FA의 동치성.
+ 다음: [09-regex.md](./09-regex.md) — 정규 표현식, 그리고 RE ⇔ FA의 동치성.

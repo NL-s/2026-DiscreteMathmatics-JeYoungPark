@@ -295,7 +295,7 @@ class Trie:
 
 ## 2.5 실습 예제 — LeetCode
 
-### 🔰 [LeetCode 700. Search in a Binary Search Tree](https://leetcode.com/problems/search-in-a-binary-search-tree/)
+###  [LeetCode 700. Search in a Binary Search Tree](https://leetcode.com/problems/search-in-a-binary-search-tree/)
 
 > 주어진 BST에서 값 `val`을 가진 노드를 찾으세요.
 
@@ -313,7 +313,7 @@ class Solution:
 **해설**: BST 정의에 따라 한 방향씩만 내려가면 됩니다. 시간 $O(h)$, 공간 $O(1)$ (재귀 없이).
 </details>
 
-### 🔰 [LeetCode 98. Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
+###  [LeetCode 98. Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
 
 > 주어진 이진 트리가 BST 조건을 만족하는지 검사하세요.
 
@@ -346,7 +346,7 @@ class Solution:
 **또는** in-order 순회 결과가 strictly increasing인지 검사해도 됩니다 (1.7절 참고).
 </details>
 
-### 🔰 [LeetCode 215. Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/)
+###  [LeetCode 215. Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/)
 
 > 배열에서 k번째로 큰 원소를 찾으세요.
 
@@ -370,7 +370,7 @@ class Solution:
 **시간**: $O(n \log k)$, **공간**: $O(k)$. 전체 정렬 $O(n \log n)$보다 빠릅니다 (k가 작을수록).
 </details>
 
-### 🔰 [LeetCode 208. Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/)
+###  [LeetCode 208. Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/)
 
 > Trie 자료구조의 `insert`, `search`, `startsWith` 메서드를 구현하세요.
 
@@ -380,7 +380,7 @@ class Solution:
 위 2.3.1의 코드를 그대로 LeetCode에 제출하면 통과합니다. 핵심은 **딕셔너리**로 `children`을 관리하는 것 — 알파벳 26개를 가정하더라도 메모리 효율이 더 좋습니다.
 </details>
 
-### 🥇 [LeetCode 295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/)
+###  [LeetCode 295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/)
 
 > 스트림으로 들어오는 숫자들의 중앙값을 매번 빠르게 구하세요.
 
@@ -415,4 +415,4 @@ class MedianFinder:
 
 ---
 
-➡️ 다음: [03-spanning-tree-mst.md](./03-spanning-tree-mst.md) — 그래프에서 트리를 *뽑아내는* 두 가지 고전 알고리즘.
+ 다음: [03-spanning-tree-mst.md](./03-spanning-tree-mst.md) — 그래프에서 트리를 *뽑아내는* 두 가지 고전 알고리즘.

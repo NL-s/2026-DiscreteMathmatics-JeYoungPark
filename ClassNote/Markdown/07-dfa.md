@@ -311,7 +311,7 @@ CLOSED → LISTEN → SYN_RECEIVED → ESTABLISHED → ... → TIME_WAIT → CLO
 
 ## 7.10 실습 예제 — LeetCode
 
-### 🔰 [LeetCode 1576. Replace All ?'s to Avoid Consecutive Repeating Characters](https://leetcode.com/problems/replace-all-s-to-avoid-consecutive-repeating-characters/)
+###  [LeetCode 1576. Replace All ?'s to Avoid Consecutive Repeating Characters](https://leetcode.com/problems/replace-all-s-to-avoid-consecutive-repeating-characters/)
 
 > 문자열의 `?`를 다른 글자로 바꿔서 연속된 같은 글자가 없도록 만들기.
 
@@ -334,7 +334,7 @@ class Solution:
 **해설**: 각 위치에서 "이전 글자가 무엇인지"를 상태로 보면 DFA적 사고. 단순히 a, b, c 세 글자 중 양쪽과 다른 걸 고르면 항상 가능.
 </details>
 
-### 🥈 [LeetCode 8. String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi/)
+###  [LeetCode 8. String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi/)
 
 > 문자열을 정수로 변환하는 atoi 구현.
 
@@ -384,7 +384,7 @@ class Solution:
 **해설**: 문제 명세 자체가 FSM으로 설계된 전형 예. *문제를 보는 순간 DFA가 떠올라야 한다*는 게 이 문제의 학습 포인트.
 </details>
 
-### 🥈 [LeetCode 65. Valid Number](https://leetcode.com/problems/valid-number/)
+###  [LeetCode 65. Valid Number](https://leetcode.com/problems/valid-number/)
 
 > 주어진 문자열이 valid number인지? (`+1.5e3`, `-.5`, `3.` 등)
 
@@ -439,7 +439,7 @@ class Solution:
 **해설**: 매우 복잡한 정규 언어를 DFA로 명시적으로 코딩. 정규식 `^[+-]?(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?$`와 동치.
 </details>
 
-### 🥇 [LeetCode 1106. Parsing A Boolean Expression](https://leetcode.com/problems/parsing-a-boolean-expression/)
+###  [LeetCode 1106. Parsing A Boolean Expression](https://leetcode.com/problems/parsing-a-boolean-expression/)
 
 > 부울 표현식 `!(&(t,f,t))` 같은 걸 파싱해서 평가.
 
@@ -477,4 +477,4 @@ class Solution:
 
 ---
 
-➡️ 다음: [08-nfa-equivalence.md](./08-nfa-equivalence.md) — 비결정성이라는 마법, 그리고 그게 표현력을 안 늘린다는 놀라운 결과.
+ 다음: [08-nfa-equivalence.md](./08-nfa-equivalence.md) — 비결정성이라는 마법, 그리고 그게 표현력을 안 늘린다는 놀라운 결과.

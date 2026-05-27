@@ -287,4 +287,4 @@ Inorder는 `L → N → R` 순서로 방문하므로,
 
 ---
 
-➡️ 다음: [02-bst-and-heap.md](./02-bst-and-heap.md) — BST, Heap, Trie로 들어갑니다.
+ 다음: [02-bst-and-heap.md](./02-bst-and-heap.md) — BST, Heap, Trie로 들어갑니다.

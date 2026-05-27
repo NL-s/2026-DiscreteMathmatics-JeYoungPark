@@ -7,7 +7,7 @@
 
 ---
 
-## 📚 학습 흐름 (Big Picture)
+##  학습 흐름 (Big Picture)
 
 ```
 Week 1 ─ Logic ──┐
@@ -25,7 +25,7 @@ Week 4-5 ── Trees ──→ Boolean Algebra ──→ Automata
 
 ---
 
-## 🗂️ 목차
+##  목차
 
 ### Part 1 · Trees (트리)
 | # | 파일 | 주제 |
@@ -56,7 +56,7 @@ Week 4-5 ── Trees ──→ Boolean Algebra ──→ Automata
 
 ---
 
-## 🔧 학습 도구 안내
+##  학습 도구 안내
 
 - **수식**: LaTeX 형식. 인라인은 `$...$`, 블록은 `$$...$$`로 작성되어 있어 GitHub에서 그대로 렌더링됩니다.
 - **다이어그램**: Mermaid 사용 (GitHub 네이티브 지원).
@@ -64,7 +64,7 @@ Week 4-5 ── Trees ──→ Boolean Algebra ──→ Automata
 - **실습 정답**: 모든 해설은 `<details>` 토글로 감춰져 있습니다. 클릭해서 펼치세요.
 
 <details>
-<summary>📌 펼침 해설 예시 (클릭하여 열기)</summary>
+<summary> 펼침 해설 예시 (클릭하여 열기)</summary>
 
 이런 식으로 정답·풀이가 숨겨져 있습니다.  
 **먼저 스스로 풀어본 뒤** 펼쳐서 확인하세요.
@@ -73,7 +73,7 @@ Week 4-5 ── Trees ──→ Boolean Algebra ──→ Automata
 
 ---
 
-## ⚠️ 백준(BOJ) 대신 LeetCode 사용 안내
+##  백준(BOJ) 대신 LeetCode 사용 안내
 
 원래 강의 자료는 백준 온라인 저지(BOJ) 문제를 사용하지만, **현재 BOJ 사이트 접속 이슈로 LeetCode로 대체**합니다. 모든 실습 링크는 LeetCode의 무료 문제로 연결됩니다.
 
@@ -81,7 +81,7 @@ LeetCode 계정이 없어도 문제는 열람 가능하지만, 코드 제출·�
 
 ---
 
-## 💡 학습 전략 (강의 시간이 없는 만큼)
+##  학습 전략 (강의 시간이 없는 만큼)
 
 1. **순서대로** 읽으세요. 각 섹션이 이전 섹션의 개념을 빌려갑니다.
 2. **수식만 보지 말고** 코드 예제를 직접 타이핑·실행해 보세요.

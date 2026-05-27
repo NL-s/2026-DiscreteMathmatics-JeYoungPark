@@ -265,7 +265,7 @@ print(pat.match('alice'))  # None
 
 ## 9.10 실습 예제 — LeetCode
 
-### 🔰 [LeetCode 1408. String Matching in an Array](https://leetcode.com/problems/string-matching-in-an-array/)
+###  [LeetCode 1408. String Matching in an Array](https://leetcode.com/problems/string-matching-in-an-array/)
 
 > 배열의 문자열 중 다른 문자열의 부분 문자열인 것들 반환.
 
@@ -281,7 +281,7 @@ class Solution:
 **해설**: Python `in` 연산자가 KMP / Boyer-Moore 등 효율적 알고리즘을 사용. 정규식이 아니라도 부분 문자열 매칭은 정규 언어로 표현 가능.
 </details>
 
-### 🥈 [LeetCode 393. UTF-8 Validation](https://leetcode.com/problems/utf-8-validation/)
+###  [LeetCode 393. UTF-8 Validation](https://leetcode.com/problems/utf-8-validation/)
 
 > 정수 배열이 valid UTF-8 인코딩인지 판단.
 
@@ -310,7 +310,7 @@ class Solution:
 **해설**: UTF-8 인코딩의 정당성은 사실 정규 언어 (각 위치의 비트 패턴이 정해진 정규식). 상태 = "남은 continuation 수" 5개 정도로 DFA 가능.
 </details>
 
-### 🥈 [LeetCode 468. Validate IP Address](https://leetcode.com/problems/validate-ip-address/)
+###  [LeetCode 468. Validate IP Address](https://leetcode.com/problems/validate-ip-address/)
 
 > IPv4/IPv6 주소 형식 검증.
 
@@ -333,7 +333,7 @@ class Solution:
 **해설**: 각 옥텟 (0-255) 자체가 정규 표현식으로 표현 가능 → 전체 주소도 정규식 → DFA로 변환 가능.
 </details>
 
-### 🥇 [LeetCode 32. Longest Valid Parentheses](https://leetcode.com/problems/longest-valid-parentheses/)
+###  [LeetCode 32. Longest Valid Parentheses](https://leetcode.com/problems/longest-valid-parentheses/)
 
 > 가장 긴 valid 괄호 부분 문자열의 길이.
 
@@ -362,4 +362,4 @@ class Solution:
 
 ---
 
-➡️ 다음: [10-pumping-lemma-chomsky.md](./10-pumping-lemma-chomsky.md) — 정규 언어가 *못 하는 것*을 수학적으로 증명하기.
+ 다음: [10-pumping-lemma-chomsky.md](./10-pumping-lemma-chomsky.md) — 정규 언어가 *못 하는 것*을 수학적으로 증명하기.

@@ -314,7 +314,7 @@ disprove_regular(is_in_L, w)
 
 ## 10.15 실습 예제 — LeetCode
 
-### 🥈 [LeetCode 20. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/)
+###  [LeetCode 20. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/)
 
 > 괄호 `()[]{}` 등이 올바르게 매칭되는지.
 
@@ -338,7 +338,7 @@ class Solution:
 **학습 포인트**: 이 문제 자체가 **non-regular language**의 결정 문제. 스택(=PDA) 필요. 펌핑 보조정리로 정규가 아님 증명 가능.
 </details>
 
-### 🥇 [LeetCode 678. Valid Parenthesis String](https://leetcode.com/problems/valid-parenthesis-string/)
+###  [LeetCode 678. Valid Parenthesis String](https://leetcode.com/problems/valid-parenthesis-string/)
 
 > 괄호에 `*` (와일드카드)가 섞인 문자열의 매칭 가능 여부.
 
@@ -365,7 +365,7 @@ class Solution:
 **해설**: 그리디 풀이. NFA처럼 "동시에 가능한 상태"를 압축해서 추적.
 </details>
 
-### 🥇 [LeetCode 224. Basic Calculator](https://leetcode.com/problems/basic-calculator/)
+###  [LeetCode 224. Basic Calculator](https://leetcode.com/problems/basic-calculator/)
 
 > `(1+(4+5+2)-3)+(6+8)` 같은 산술식 계산.
 
@@ -402,7 +402,7 @@ class Solution:
 **해설**: 임의 깊이의 괄호 → **CFL**. 스택 필수.
 </details>
 
-### 🥇 [LeetCode 726. Number of Atoms](https://leetcode.com/problems/number-of-atoms/)
+###  [LeetCode 726. Number of Atoms](https://leetcode.com/problems/number-of-atoms/)
 
 > 화학식 `K4(ON(SO3)2)2` 같은 걸 원자별 개수로 분해.
 
@@ -453,4 +453,4 @@ class Solution:
 
 ---
 
-➡️ 마지막: [11-practice.md](./11-practice.md) — 종합 실습 + 학습 정리.
+ 마지막: [11-practice.md](./11-practice.md) — 종합 실습 + 학습 정리.
